@@ -72,7 +72,7 @@ class TTS(Model):
             output_ta = tf.TensorArray(size=reduced_time_steps, dtype=tf.float32)
             alpha_ta = tf.TensorArray(size=reduced_time_steps, dtype=tf.float32)
             init_indic = tf.zeros([batch_size, OUTPUT_MEL_DIM])
-            init_context = tf.zeros((batch_size, 256))
+            # init_context = tf.zeros((batch_size, 256))
 
             time = tf.constant(0, dtype=tf.int32)
             cond = lambda time, *_: tf.less(time, reduced_time_steps)
@@ -88,7 +88,7 @@ class TTS(Model):
                 with tf.variable_scope("acoustic_module"):
                     aco_input = tf.layers.dense(tf.concat([att_cell_out, att_embed_speaker, context], axis=-1), DEC_RNN_SIZE)
                     aco_cell_out, aco_cell_state = aco_cell(aco_input, state_tup[1])
-                    dense_out = tf.reshape(\
+                    dense_out = tf.reshape(
                             tf.layers.dense(aco_cell_out, OUTPUT_MEL_DIM * self.r),
                             shape=(batch_size, self.r, OUTPUT_MEL_DIM))
                     output_ta = output_ta.write(time, dense_out)

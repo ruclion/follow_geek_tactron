@@ -1,0 +1,28 @@
+test  201 wintimes:  20 mean_steps:  58.8
+test  401 wintimes:  14 mean_steps:  81.9285714286
+test  601 wintimes:  2 mean_steps:  64.0
+test  801 wintimes:  6 mean_steps:  65.1666666667
+test  1001 wintimes:  20 mean_steps:  81.65
+test  1201 wintimes:  21 mean_steps:  68.5238095238
+test  1401 wintimes:  28 mean_steps:  60.3214285714
+test  1601 wintimes:  40 mean_steps:  47.7
+test  1801 wintimes:  39 mean_steps:  53.6666666667
+test  2001 wintimes:  41 mean_steps:  75.8292682927
+test  2201 wintimes:  44 mean_steps:  54.7045454545
+test  2401 wintimes:  46 mean_steps:  54.8695652174
+test  2601 wintimes:  45 mean_steps:  45.7555555556
+test  2801 wintimes:  48 mean_steps:  45.6875
+test  3001 wintimes:  38 mean_steps:  45.1842105263
+test  3201 wintimes:  46 mean_steps:  66.7173913043
+test  3401 wintimes:  49 mean_steps:  54.6326530612
+test  3601 wintimes:  47 mean_steps:  43.7234042553
+test  3801 wintimes:  42 mean_steps:  47.1904761905
+test  4001 wintimes:  40 mean_steps:  40.975
+test  4201 wintimes:  40 mean_steps:  43.65
+test  4401 wintimes:  43 mean_steps:  43.3720930233
+test  4601 wintimes:  35 mean_steps:  49.1714285714
+test  4801 wintimes:  41 mean_steps:  51.3170731707
+test  5001 wintimes:  37 mean_steps:  56.1621621622
+
+
+path:/home/tiger/code/drl_webots/webots_python/my_net21

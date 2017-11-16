@@ -30,11 +30,12 @@ class BahdanauAttentionModule(object):
         with tf.variable_scope('attention'):
             Ua = tf.get_variable(name='Ua', shape=(1, 1, self.enc_units, self.attention_units))
         self.hidden_feats = tf.nn.conv2d(self.memory, Ua, [1, 1, 1, 1], "SAME")
+
     
     def __call__(self, query):
 
         with tf.variable_scope('attention'):
-            # Check if the memory's batch_size is consistent with query's batch_size
+            # Check if the m emory's batch_size is consistent with query's batch_size
 
             query_units = query.get_shape()[-1].value
 
@@ -43,7 +44,7 @@ class BahdanauAttentionModule(object):
                                  initializer=tf.constant_initializer(0.0) if self.mode == 0 else tf.constant_initializer(1e-2))
             b  = tf.get_variable(name='b',  shape=(self.attention_units,),
                                  initializer=tf.constant_initializer(0.0) if self.mode == 0 else tf.constant_initializer(0.5))
- 
+
             # 1st. compute query_feat (query's repsentation in attention module)
             query_feat = tf.reshape(tf.matmul(query, Wa), (-1, 1, 1, self.attention_units))
 

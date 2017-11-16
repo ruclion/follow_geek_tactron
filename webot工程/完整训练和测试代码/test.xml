@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test>
+<episode>
+<document> 1.98069332065 </document>
+<human_x> 3 </human_x>
+<human_y> 6 </human_y>
+<human_rotation_z> 1 </human_rotation_z>
+<robot_x> 5.25325615414 </robot_x>
+<robot_y> 4.65419444906 </robot_y>
+<robot_rotation_z> 2.57290538801 </robot_rotation_z>
+</episode>
+<episode>
+<document> 1.12865293882 </document>
+<human_x> 3 </human_x>
+<human_y> 6 </human_y>
+<human_rotation_z> 2 </human_rotation_z>
+<robot_x> 3.48545019219 </robot_x>
+<robot_y> 7.81891882268 </robot_y>
+<robot_rotation_z> 0.609228654832 </robot_rotation_z>
+</episode>
+<episode>
+<document> 1.82300391373 </document>
+<human_x> 3 </human_x>
+<human_y> 6 </human_y>
+<human_rotation_z> 3 </human_rotation_z>
+<robot_x> 3.97867493417 </robot_x>
+<robot_y> 6.39957320734 </robot_y>
+<robot_rotation_z> 2.40708436956 </robot_rotation_z>
+</episode>
+<episode>
+<document> 1.76139982444 </document>
+<human_x> 3 </human_x>
+<human_y> 6 </human_y>
+<human_rotation_z> 4 </human_rotation_z>
+<robot_x> 4.52305277588 </robot_x>
+<robot_y> 4.31521777627 </robot_y>
+<robot_rotation_z> 0.360120604125 </robot_rotation_z>
+</episode>
+<episode>
+<document> 1.87250991861 </document>
+<human_x> 4.5 </human_x>
+<human_y> 7.5 </human_y>
+<human_rotation_z> 1 </human_rotation_z>
+<robot_x> 4.95865427634 </robot_x>
+<robot_y> 5.65886543342 </robot_y>
+<robot_rotation_z> 0.722045652309 </robot_rotation_z>
+</episode>
+<episode>
+<document> 1.7357737291 </document>
+<human_x> 4.5 </human_x>
+<human_y> 7.5 </human_y>
+<human_rotation_z> 2 </human_rotation_z>
+<robot_x> 5.13002937128 </robot_x>
+<robot_y> 6.68260288428 </robot_y>
+<robot_rotation_z> 0.123617192512 </robot_rotation_z>
+</episode>
+<episode>
+<document> 1.95583150586 </document>
+<human_x> 4.5 </human_x>
+<human_y> 7.5 </human_y>
+<human_rotation_z> 3 </human_rotation_z>
+<robot_x> 2.19763247981 </robot_x>
+<robot_y> 6.24773456745 </robot_y>
+<robot_rotation_z> 1.57638445739 </robot_rotation_z>
+</episode>
+<episode>
+<document> 1.59154313651 </document>
+<human_x> 4.5 </human_x>
+<human_y> 7.5 </human_y>
+<human_rotation_z> 4 </human_rotation_z>
+<robot_x> 3.08304906169 </robot_x>
+<robot_y> 5.97525204809 </robot_y>
+<robot_rotation_z> 2.11744153332 </robot_rotation_z>
+</episode>
+<episode>
+<document> 1.88655500682 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 1 </human_rotation_z>
+<robot_x> 1.49453023668 </robot_x>
+<robot_y> 0.952854016278 </robot_y>
+<robot_rotation_z> 2.88940303506 </robot_rotation_z>
+</episode>
+<episode>
+<document> 1.73044647885 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 2 </human_rotation_z>
+<robot_x> 1.51263288533 </robot_x>
+<robot_y> 0.878890856741 </robot_y>
+<robot_rotation_z> 1.82492495098 </robot_rotation_z>
+</episode>
+<episode>
+<document> 1.81013089279 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 3 </human_rotation_z>
+<robot_x> 3.4818564308 </robot_x>
+<robot_y> 1.18131283513 </robot_y>
+<robot_rotation_z> -1.75208042443 </robot_rotation_z>
+</episode>
+<episode>
+<document> 1.74928709475 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 4 </human_rotation_z>
+<robot_x> 1.23332470744 </robot_x>
+<robot_y> 1.90645722804 </robot_y>
+<robot_rotation_z> 0.0464292027877 </robot_rotation_z>
+</episode>
+<episode>
+<document> 2.11690372061 </document>
+<human_x> 3 </human_x>
+<human_y> 6 </human_y>
+<human_rotation_z> 1 </human_rotation_z>
+<robot_x> 2.91341047289 </robot_x>
+<robot_y> 4.07769919816 </robot_y>
+<robot_rotation_z> 2.92553842122 </robot_rotation_z>
+</episode>
+<episode>
+<document> 2.3677188497 </document>
+<human_x> 3 </human_x>
+<human_y> 6 </human_y>
+<human_rotation_z> 2 </human_rotation_z>
+<robot_x> 5.3563664768 </robot_x>
+<robot_y> 7.03158060846 </robot_y>
+<robot_rotation_z> -0.460154168927 </robot_rotation_z>
+</episode>
+<episode>
+<document> 2.19977890865 </document>
+<human_x> 3 </human_x>
+<human_y> 6 </human_y>
+<human_rotation_z> 3 </human_rotation_z>
+<robot_x> 3.49589667238 </robot_x>
+<robot_y> 4.22245138985 </robot_y>
+<robot_rotation_z> 1.5330050151 </robot_rotation_z>
+</episode>
+<episode>
+<document> 2.94733258016 </document>
+<human_x> 3 </human_x>
+<human_y> 6 </human_y>
+<human_rotation_z> 4 </human_rotation_z>
+<robot_x> 2.87802527542 </robot_x>
+<robot_y> 2.25519245032 </robot_y>
+<robot_rotation_z> -0.247976091118 </robot_rotation_z>
+</episode>
+<episode>
+<document> 2.35534864279 </document>
+<human_x> 4.5 </human_x>
+<human_y> 7.5 </human_y>
+<human_rotation_z> 1 </human_rotation_z>
+<robot_x> 5.03559277206 </robot_x>
+<robot_y> 5.15953935156 </robot_y>
+<robot_rotation_z> 2.10017307675 </robot_rotation_z>
+</episode>
+<episode>
+<document> 2.61036669187 </document>
+<human_x> 4.5 </human_x>
+<human_y> 7.5 </human_y>
+<human_rotation_z> 2 </human_rotation_z>
+<robot_x> 4.94736336856 </robot_x>
+<robot_y> 5.72825345679 </robot_y>
+<robot_rotation_z> -2.86304072439 </robot_rotation_z>
+</episode>
+<episode>
+<document> 2.64933067535 </document>
+<human_x> 4.5 </human_x>
+<human_y> 7.5 </human_y>
+<human_rotation_z> 3 </human_rotation_z>
+<robot_x> 3.18312342513 </robot_x>
+<robot_y> 4.90157901146 </robot_y>
+<robot_rotation_z> -0.248564680565 </robot_rotation_z>
+</episode>
+<episode>
+<document> 2.14705628841 </document>
+<human_x> 4.5 </human_x>
+<human_y> 7.5 </human_y>
+<human_rotation_z> 4 </human_rotation_z>
+<robot_x> 3.67737790728 </robot_x>
+<robot_y> 4.71678453057 </robot_y>
+<robot_rotation_z> -3.06637540149 </robot_rotation_z>
+</episode>
+<episode>
+<document> 2.35767119604 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 1 </human_rotation_z>
+<robot_x> 1.02347446312 </robot_x>
+<robot_y> 0.886774960922 </robot_y>
+<robot_rotation_z> 0.0284096104308 </robot_rotation_z>
+</episode>
+<episode>
+<document> 2.07556993148 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 2 </human_rotation_z>
+<robot_x> 1.12066719949 </robot_x>
+<robot_y> 0.749054621885 </robot_y>
+<robot_rotation_z> 1.32493070043 </robot_rotation_z>
+</episode>
+<episode>
+<document> 2.98682001741 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 3 </human_rotation_z>
+<robot_x> 3.23127578479 </robot_x>
+<robot_y> 4.06442747749 </robot_y>
+<robot_rotation_z> 2.73264425531 </robot_rotation_z>
+</episode>
+<episode>
+<document> 2.03802609012 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 4 </human_rotation_z>
+<robot_x> 1.09389950288 </robot_x>
+<robot_y> 2.17527344449 </robot_y>
+<robot_rotation_z> 0.526730334293 </robot_rotation_z>
+</episode>
+<episode>
+<document> 3.97458062882 </document>
+<human_x> 3 </human_x>
+<human_y> 6 </human_y>
+<human_rotation_z> 1 </human_rotation_z>
+<robot_x> 3.09669324458 </robot_x>
+<robot_y> 2.08813972863 </robot_y>
+<robot_rotation_z> 0.0303809027434 </robot_rotation_z>
+</episode>
+<episode>
+<document> 3.14059223695 </document>
+<human_x> 3 </human_x>
+<human_y> 6 </human_y>
+<human_rotation_z> 2 </human_rotation_z>
+<robot_x> 4.69323455953 </robot_x>
+<robot_y> 4.15495249094 </robot_y>
+<robot_rotation_z> 2.39638813678 </robot_rotation_z>
+</episode>
+<episode>
+<document> 3.89012488181 </document>
+<human_x> 3 </human_x>
+<human_y> 6 </human_y>
+<human_rotation_z> 3 </human_rotation_z>
+<robot_x> 1.61389912096 </robot_x>
+<robot_y> 2.15428064523 </robot_y>
+<robot_rotation_z> 0.445843158706 </robot_rotation_z>
+</episode>
+<episode>
+<document> 3.73830026208 </document>
+<human_x> 3 </human_x>
+<human_y> 6 </human_y>
+<human_rotation_z> 4 </human_rotation_z>
+<robot_x> 1.65225533315 </robot_x>
+<robot_y> 1.71309977739 </robot_y>
+<robot_rotation_z> 2.0883378746 </robot_rotation_z>
+</episode>
+<episode>
+<document> 3.2316951184 </document>
+<human_x> 4.5 </human_x>
+<human_y> 7.5 </human_y>
+<human_rotation_z> 1 </human_rotation_z>
+<robot_x> 2.5808676257 </robot_x>
+<robot_y> 5.75352570321 </robot_y>
+<robot_rotation_z> -0.0546029716321 </robot_rotation_z>
+</episode>
+<episode>
+<document> 3.67511330798 </document>
+<human_x> 4.5 </human_x>
+<human_y> 7.5 </human_y>
+<human_rotation_z> 2 </human_rotation_z>
+<robot_x> 4.15163780596 </robot_x>
+<robot_y> 4.64143448763 </robot_y>
+<robot_rotation_z> -1.94309861142 </robot_rotation_z>
+</episode>
+<episode>
+<document> 3.12850047358 </document>
+<human_x> 4.5 </human_x>
+<human_y> 7.5 </human_y>
+<human_rotation_z> 3 </human_rotation_z>
+<robot_x> 3.59054402381 </robot_x>
+<robot_y> 4.37341486563 </robot_y>
+<robot_rotation_z> -0.459740061826 </robot_rotation_z>
+</episode>
+<episode>
+<document> 3.01164349654 </document>
+<human_x> 4.5 </human_x>
+<human_y> 7.5 </human_y>
+<human_rotation_z> 4 </human_rotation_z>
+<robot_x> 2.07249604237 </robot_x>
+<robot_y> 4.9175238891 </robot_y>
+<robot_rotation_z> 1.5169074914 </robot_rotation_z>
+</episode>
+<episode>
+<document> 3.25873378372 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 1 </human_rotation_z>
+<robot_x> 3.2600619965 </robot_x>
+<robot_y> 4.75848904081 </robot_y>
+<robot_rotation_z> -0.209243274116 </robot_rotation_z>
+</episode>
+<episode>
+<document> 3.01418734422 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 2 </human_rotation_z>
+<robot_x> 4.64733053987 </robot_x>
+<robot_y> 4.41525338874 </robot_y>
+<robot_rotation_z> -2.11571818008 </robot_rotation_z>
+</episode>
+<episode>
+<document> 3.58992408964 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 3 </human_rotation_z>
+<robot_x> 3.30445451 </robot_x>
+<robot_y> 4.71142969637 </robot_y>
+<robot_rotation_z> -3.02499974586 </robot_rotation_z>
+</episode>
+<episode>
+<document> 3.71162748284 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 4 </human_rotation_z>
+<robot_x> 2.66332328314 </robot_x>
+<robot_y> 4.40803237265 </robot_y>
+<robot_rotation_z> -2.67864932251 </robot_rotation_z>
+</episode>
+<episode>
+<document> 4.78706142209 </document>
+<human_x> 3 </human_x>
+<human_y> 6 </human_y>
+<human_rotation_z> 1 </human_rotation_z>
+<robot_x> 2.52071873724 </robot_x>
+<robot_y> 1.38704037416 </robot_y>
+<robot_rotation_z> -1.81611174508 </robot_rotation_z>
+</episode>
+<episode>
+<document> 4.75299326765 </document>
+<human_x> 3 </human_x>
+<human_y> 6 </human_y>
+<human_rotation_z> 2 </human_rotation_z>
+<robot_x> 2.43240583069 </robot_x>
+<robot_y> 2.08101898062 </robot_y>
+<robot_rotation_z> 0.9069575783 </robot_rotation_z>
+</episode>
+<episode>
+<document> 4.34305180206 </document>
+<human_x> 3 </human_x>
+<human_y> 6 </human_y>
+<human_rotation_z> 3 </human_rotation_z>
+<robot_x> 2.42808600607 </robot_x>
+<robot_y> 1.66294158107 </robot_y>
+<robot_rotation_z> -2.94602557097 </robot_rotation_z>
+</episode>
+<episode>
+<document> 4.33711916308 </document>
+<human_x> 3 </human_x>
+<human_y> 6 </human_y>
+<human_rotation_z> 4 </human_rotation_z>
+<robot_x> 3.11214727093 </robot_x>
+<robot_y> 0.864331006132 </robot_y>
+<robot_rotation_z> 1.31674908148 </robot_rotation_z>
+</episode>
+<episode>
+<document> 4.17551278937 </document>
+<human_x> 4.5 </human_x>
+<human_y> 7.5 </human_y>
+<human_rotation_z> 1 </human_rotation_z>
+<robot_x> 2.24839294079 </robot_x>
+<robot_y> 4.64998220876 </robot_y>
+<robot_rotation_z> -0.895281287784 </robot_rotation_z>
+</episode>
+<episode>
+<document> 4.24848148406 </document>
+<human_x> 4.5 </human_x>
+<human_y> 7.5 </human_y>
+<human_rotation_z> 2 </human_rotation_z>
+<robot_x> 4.37077802434 </robot_x>
+<robot_y> 4.05348418095 </robot_y>
+<robot_rotation_z> 2.27181009718 </robot_rotation_z>
+</episode>
+<episode>
+<document> 4.97802386194 </document>
+<human_x> 4.5 </human_x>
+<human_y> 7.5 </human_y>
+<human_rotation_z> 4 </human_rotation_z>
+<robot_x> 3.40941675153 </robot_x>
+<robot_y> 1.84290727408 </robot_y>
+<robot_rotation_z> -1.49147529809 </robot_rotation_z>
+</episode>
+<episode>
+<document> 4.5844007702 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 1 </human_rotation_z>
+<robot_x> 4.32493960457 </robot_x>
+<robot_y> 5.96835867279 </robot_y>
+<robot_rotation_z> 1.1809388926 </robot_rotation_z>
+</episode>
+<episode>
+<document> 4.33418994124 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 2 </human_rotation_z>
+<robot_x> 4.17525100506 </robot_x>
+<robot_y> 6.29734118094 </robot_y>
+<robot_rotation_z> 1.75307163764 </robot_rotation_z>
+</episode>
+<episode>
+<document> 4.72991306781 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 3 </human_rotation_z>
+<robot_x> 4.99105183939 </robot_x>
+<robot_y> 4.89721288992 </robot_y>
+<robot_rotation_z> 2.5873605378 </robot_rotation_z>
+</episode>
+<episode>
+<document> 4.66789806289 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 4 </human_rotation_z>
+<robot_x> 2.57984114647 </robot_x>
+<robot_y> 5.36721519933 </robot_y>
+<robot_rotation_z> -2.99117137839 </robot_rotation_z>
+</episode>
+<episode>
+<document> 5.12082475447 </document>
+<human_x> 3 </human_x>
+<human_y> 6 </human_y>
+<human_rotation_z> 1 </human_rotation_z>
+<robot_x> 1.50429972609 </robot_x>
+<robot_y> 1.4225982896 </robot_y>
+<robot_rotation_z> -1.98539060567 </robot_rotation_z>
+</episode>
+<episode>
+<document> 5.65454994016 </document>
+<human_x> 3 </human_x>
+<human_y> 6 </human_y>
+<human_rotation_z> 2 </human_rotation_z>
+<robot_x> 1.11280484717 </robot_x>
+<robot_y> 1.46966891451 </robot_y>
+<robot_rotation_z> 0.678908751056 </robot_rotation_z>
+</episode>
+<episode>
+<document> 5.24656366603 </document>
+<human_x> 3 </human_x>
+<human_y> 6 </human_y>
+<human_rotation_z> 3 </human_rotation_z>
+<robot_x> 2.27101413088 </robot_x>
+<robot_y> 0.753916956922 </robot_y>
+<robot_rotation_z> -0.632257287607 </robot_rotation_z>
+</episode>
+<episode>
+<document> 5.88928603784 </document>
+<human_x> 4.5 </human_x>
+<human_y> 7.5 </human_y>
+<human_rotation_z> 1 </human_rotation_z>
+<robot_x> 2.78432587921 </robot_x>
+<robot_y> 2.17505176049 </robot_y>
+<robot_rotation_z> -3.06430287046 </robot_rotation_z>
+</episode>
+<episode>
+<document> 5.69234593081 </document>
+<human_x> 4.5 </human_x>
+<human_y> 7.5 </human_y>
+<human_rotation_z> 3 </human_rotation_z>
+<robot_x> 2.84650310058 </robot_x>
+<robot_y> 1.87200344361 </robot_y>
+<robot_rotation_z> -1.50210790123 </robot_rotation_z>
+</episode>
+<episode>
+<document> 5.32993090386 </document>
+<human_x> 4.5 </human_x>
+<human_y> 7.5 </human_y>
+<human_rotation_z> 4 </human_rotation_z>
+<robot_x> 3.39880488236 </robot_x>
+<robot_y> 1.4850663712 </robot_y>
+<robot_rotation_z> 1.47026618131 </robot_rotation_z>
+</episode>
+<episode>
+<document> 5.45604554171 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 1 </human_rotation_z>
+<robot_x> 4.08451404915 </robot_x>
+<robot_y> 6.89934909595 </robot_y>
+<robot_rotation_z> -1.49022078626 </robot_rotation_z>
+</episode>
+<episode>
+<document> 5.27860379104 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 2 </human_rotation_z>
+<robot_x> 3.91020635513 </robot_x>
+<robot_y> 7.38674513011 </robot_y>
+<robot_rotation_z> -1.99581804214 </robot_rotation_z>
+</episode>
+<episode>
+<document> 5.80578461133 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 3 </human_rotation_z>
+<robot_x> 4.03791301701 </robot_x>
+<robot_y> 6.81425419773 </robot_y>
+<robot_rotation_z> -3.12877295905 </robot_rotation_z>
+</episode>
+<episode>
+<document> 5.79739702495 </document>
+<human_x> 2.5 </human_x>
+<human_y> 1.5 </human_y>
+<human_rotation_z> 4 </human_rotation_z>
+<robot_x> 4.3742363457 </robot_x>
+<robot_y> 6.18607786906 </robot_y>
+<robot_rotation_z> 2.48265416619 </robot_rotation_z>
+</episode>
+</test>

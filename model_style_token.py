@@ -8,11 +8,13 @@ from TFCommon.Attention import BahdanauAttentionModule as AttentionModule
 from TFCommon.Layers import EmbeddingLayer
 import audio, numpy as np
 import tqdm
+import random
 
 bidirectional_dynamic_rnn = tf.nn.bidirectional_dynamic_rnn
 
 sr = 16000
 
+global data_all_size
 BATCH_SIZE = 32
 EPOCHS = 1000000	# 7142 -> 2M
 EMBED_CLASS = 100
@@ -25,6 +27,8 @@ DEC_RNN_SIZE = 256
 OUTPUT_MEL_DIM = 80	# 80
 OUTPUT_SPEC_DIM = 513 # 513
 LR_RATE = 0.001
+styles_kind = 10
+style_dim = 2
 #LR_RATE = 0.0005
 #LR_RATE = 0.00025
 #LR_RATE = 0.0001
@@ -53,8 +57,9 @@ class TTS(Model):
                 embed_inp = EmbeddingLayer(EMBED_CLASS, EMBED_DIM)(inp)
 
             with tf.variable_scope("changeToVarible"):
-                self.style_token = tf.get_variable('style_token', shape=tf.shape(style_token_place_holder), dtype=tf.float32, initializer=style_token_place_holder)
-
+                global data_all_size
+                self.style_token = tf.get_variable('style_token', shape=(min(BATCH_SIZE, 2), styles_kind, style_dim), dtype=tf.float32)
+                tf.assign(self.style_token, style_token_place_holder)
             with tf.variable_scope("pre-net"):
                 pre_ed_inp = tf.layers.dropout(tf.layers.dense(embed_inp, 256, tf.nn.relu), training=self.training)
                 pre_ed_inp = tf.layers.dropout(tf.layers.dense(pre_ed_inp, 128, tf.nn.relu), training=self.training)
@@ -67,6 +72,7 @@ class TTS(Model):
 
         with tf.variable_scope("attention"):
             att_module = AttentionModule(ATT_RNN_SIZE, encoder_output, sequence_length=inp_mask, time_major=False)
+        with tf.variable_scope("attention_style"):
             att_module_style = AttentionModule(ATT_RNN_SIZE, pre_style_token, time_major=False)
 
         with tf.variable_scope("decoder"):
@@ -100,8 +106,9 @@ class TTS(Model):
                 with tf.variable_scope("attention"):
                     query = att_cell_state[0]    # att_cell_out
                     context, alpha = att_module(query)
-                    context_style, alpha_style = att_module_style(query)
                     alpha_ta = alpha_ta.write(time, alpha)
+                with tf.variable_scope("attention_style"):
+                    context_style, alpha_style = att_module_style(query)
                 with tf.variable_scope("acoustic_module"):
                     aco_input = tf.layers.dense(tf.concat([att_cell_out, att_embed_speaker, context, context_style], axis=-1), DEC_RNN_SIZE)
                     aco_cell_out, aco_cell_state = aco_cell(aco_input, state_tup[1])
@@ -165,7 +172,14 @@ with tf.variable_scope("model"):
             train_upd = opt.apply_gradients(grads_and_vars, global_step=global_step)
     saver = tf.train.Saver()
 
-data_path = 'data.csv'
+def get_next_batch_index():
+    return [0, 1]
+    '''
+    a = random.shuffle(np.array(range(0, data_all_size)))
+    return a[0:min(BATCH_SIZE, data_all_size)]
+    '''
+
+data_path = 'data.npz'
 save_path = "save"
 model_name = "TTS"
 
@@ -173,13 +187,18 @@ if __name__ == "__main__":
     if not os.path.exists(save_path):
         os.makedirs(save_path)
 
+
     #read data
-    data_inp = 1
-    data_inp_mask = 1
-    data_mel_gtruth = 1
-    data_spec_gtruth = 1
-    data_speaker = 1
-    data_style = 1
+    data = np.load(data_path)
+    data_inp = data['inp']
+    data_inp_mask = data['inp_mask']
+    data_mel_gtruth = data['mel_gtruth']
+    data_spec_gtruth = data['spec_gtruth']
+    data_speaker = data['speaker']
+    data_style = data['style']
+
+    global  data_all_size
+    data_all_size = data_inp.shape[0]
 
     train_summary = train_model.summary("train", 2)
 
@@ -198,12 +217,21 @@ if __name__ == "__main__":
 
         try:
             for cnt in range(EPOCHS):
-                batch_inp = 1
-                batch_inp_mask = 1
-                batch_mel_gtruth = 1
-                batch_spec_gtruth = 1
-                batch_speaker = 1
-                batch_style = 1
+                batch_index = get_next_batch_index()
+
+                batch_inp = data_inp[batch_index]
+                batch_inp_mask = data_inp_mask[batch_index]
+                batch_mel_gtruth = data_mel_gtruth[batch_index]
+                batch_spec_gtruth = data_spec_gtruth[batch_index]
+                batch_speaker = data_speaker[batch_index]
+                batch_style = data_style[batch_index]
+
+                print(batch_index)
+                print(batch_inp)
+                print(batch_inp_mask)
+                print(batch_spec_gtruth)
+                print(batch_style)
+
                 mean_loss_holder = tf.placeholder(shape=(), dtype=tf.float32, name='mean_loss')
                 train_epoch_summary = tf.summary.scalar('epoch/train/loss', mean_loss_holder)
                 total_loss = 0.
@@ -215,7 +243,7 @@ if __name__ == "__main__":
                 spec_gtruth = tf.placeholder(name="output_spec", shape=(None, None, OUTPUT_SPEC_DIM), dtype=tf.float32)
                 style_token_place_holder = tf.placeholder(name="input_style", shape=(None, None, None),
                                                           dtype=tf.float32)
-
+                print('start:', cnt, EPOCHS)
                 _, loss_eval, global_step_eval, new_style = sess.run([train_upd, train_model.loss, global_step, train_model.style_token],
                                                                      feed_dict={inp:batch_inp, inp_mask:batch_inp_mask,
                                                                                 speaker:batch_speaker, mel_gtruth:batch_mel_gtruth,
@@ -239,5 +267,5 @@ if __name__ == "__main__":
 
 
         except Exception as e:
-            print('Training stopped')
+            print('Training stopped', str(e))
 

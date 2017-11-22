@@ -34,3 +34,16 @@ def invert_spectrogram(spec, coef=1.2, out_fn=None, sr=16000, return_float=True,
         y = y / np.max(np.abs(y))
     return y
 
+def invert_spectrogram_noTandPower(spec, coef=1.2, out_fn=None, sr=16000, return_float=True, de_emp=True):
+    # spec = np.power(np.exp(spec.T), coef)
+    wav_dots = (spec.shape[1] - 1) * hop_length
+    y = np.random.uniform(low=-1, high=1, size=(wav_dots,))
+    for i in range(50):
+        s_m = librosa.core.stft(y, n_fft=n_fft, hop_length=hop_length, win_length=win_length)
+        s_m = spec * s_m / np.abs(s_m)
+        y = librosa.core.istft(s_m, hop_length=hop_length, win_length=win_length)
+    if de_emp:
+        y = de_emphasis(y, 0.85)
+    if return_float:
+        y = y / np.max(np.abs(y))
+    return y

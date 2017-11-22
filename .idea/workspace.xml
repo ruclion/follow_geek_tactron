@@ -2,12 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="daa00eb6-e452-45b7-a013-4b2beef83a86" name="Default" comment="">
+<<<<<<< HEAD
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data_process_util.py" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/webot工程/户建坤webotpython代码文档/~$hjk_saved_neural_qlearning.docx" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/audio.py" afterPath="$PROJECT_DIR$/audio.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model_style_token.py" afterPath="$PROJECT_DIR$/model_style_token.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_tensorflow.py" afterPath="$PROJECT_DIR$/test_tensorflow.py" />
+=======
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TFCommon/tmp.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+>>>>>>> 0a59059297a6dc7ac9c01c14ab644acc9bb55b00
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,8 +26,13 @@
       <file leaf-file-name="Attention.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TFCommon/Attention.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="31">
               <caret line="114" column="0" lean-forward="false" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+=======
+            <state relative-caret-position="155">
+              <caret line="41" column="22" lean-forward="false" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
+>>>>>>> 0a59059297a6dc7ac9c01c14ab644acc9bb55b00
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -30,6 +40,7 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="test_tensorflow.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test_tensorflow.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -98,6 +109,76 @@
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
+=======
+      <file leaf-file-name="tmp.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/TFCommon/tmp.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="31">
+              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <folding />
+>>>>>>> 0a59059297a6dc7ac9c01c14ab644acc9bb55b00
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_tensorflow.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_tensorflow.py">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="945">
+              <caret line="192" column="35" lean-forward="false" selection-start-line="192" selection-start-column="35" selection-end-line="192" selection-end-column="35" />
+=======
+            <state relative-caret-position="279">
+              <caret line="9" column="22" lean-forward="false" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CBHG.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tacotron/Modules/CBHG.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1891">
+              <caret line="64" column="51" lean-forward="false" selection-start-line="64" selection-start-column="51" selection-end-line="64" selection-end-column="51" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConvNet.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tacotron/Modules/ConvNet.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2387">
+              <caret line="78" column="26" lean-forward="false" selection-start-line="78" selection-start-column="26" selection-end-line="78" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RNNCell.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TFCommon/RNNCell.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4557">
+              <caret line="148" column="38" lean-forward="false" selection-start-line="148" selection-start-column="33" selection-end-line="148" selection-end-column="38" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Layers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TFCommon/Layers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1209">
+              <caret line="40" column="36" lean-forward="false" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -105,8 +186,9 @@
       <file leaf-file-name="generate.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/generate.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="945">
-              <caret line="192" column="35" lean-forward="false" selection-start-line="192" selection-start-column="35" selection-end-line="192" selection-end-column="35" />
+            <state relative-caret-position="2201">
+              <caret line="80" column="74" lean-forward="false" selection-start-line="80" selection-start-column="69" selection-end-line="80" selection-end-column="74" />
+>>>>>>> 0a59059297a6dc7ac9c01c14ab644acc9bb55b00
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -129,8 +211,13 @@
       <file leaf-file-name="model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="-1642">
               <caret line="154" column="32" lean-forward="false" selection-start-line="154" selection-start-column="32" selection-end-line="154" selection-end-column="32" />
+=======
+            <state relative-caret-position="2511">
+              <caret line="91" column="32" lean-forward="false" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="32" />
+>>>>>>> 0a59059297a6dc7ac9c01c14ab644acc9bb55b00
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -144,6 +231,7 @@
     <findStrings>
       <find>CBHG</find>
       <find>tqdm</find>
+<<<<<<< HEAD
       <find>Variable</find>
       <find>minimize</find>
       <find>initializer</find>
@@ -160,6 +248,10 @@
       <find>wav</find>
       <find>audio</find>
       <find>MAX</find>
+=======
+      <find>ResidualWrapper</find>
+      <find>Variable</find>
+>>>>>>> 0a59059297a6dc7ac9c01c14ab644acc9bb55b00
     </findStrings>
     <replaceStrings>
       <replace>batch</replace>
@@ -173,12 +265,18 @@
       <list>
         <option value="$PROJECT_DIR$/model.py" />
         <option value="$PROJECT_DIR$/generate.py" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/TFCommon/Attention.py" />
         <option value="$PROJECT_DIR$/TFCommon/Layers.py" />
         <option value="$PROJECT_DIR$/audio.py" />
         <option value="$PROJECT_DIR$/data_process_util.py" />
         <option value="$PROJECT_DIR$/test_tensorflow.py" />
         <option value="$PROJECT_DIR$/model_style_token.py" />
+=======
+        <option value="$PROJECT_DIR$/test_tensorflow.py" />
+        <option value="$PROJECT_DIR$/TFCommon/Attention.py" />
+        <option value="$PROJECT_DIR$/TFCommon/tmp.py" />
+>>>>>>> 0a59059297a6dc7ac9c01c14ab644acc9bb55b00
       </list>
     </option>
   </component>
@@ -222,12 +320,16 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../研一-大数据机器学习/mnist2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\我的坚果云\研一-语音基础\follow比赛代码\follow_geek_tactron" />
     </key>
+=======
+    <property name="last_opened_file_path" value="F:/不同步的/mnist2" />
+>>>>>>> 0a59059297a6dc7ac9c01c14ab644acc9bb55b00
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -241,6 +343,7 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="Python.model_style_token">
     <configuration name="data_process_util" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -276,6 +379,9 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+=======
+  <component name="RunManager" selected="Python.test_tensorflow">
+>>>>>>> 0a59059297a6dc7ac9c01c14ab644acc9bb55b00
     <configuration name="test_tensorflow" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -293,6 +399,7 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+<<<<<<< HEAD
     <list size="3">
       <item index="0" class="java.lang.String" itemvalue="Python.test_tensorflow" />
       <item index="1" class="java.lang.String" itemvalue="Python.data_process_util" />
@@ -303,6 +410,11 @@
         <item index="0" class="java.lang.String" itemvalue="Python.model_style_token" />
         <item index="1" class="java.lang.String" itemvalue="Python.test_tensorflow" />
         <item index="2" class="java.lang.String" itemvalue="Python.data_process_util" />
+=======
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Python.test_tensorflow" />
+>>>>>>> 0a59059297a6dc7ac9c01c14ab644acc9bb55b00
       </list>
     </recent_temporary>
   </component>
@@ -329,13 +441,22 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
+    <editor active="true" />
     <layout>
+<<<<<<< HEAD
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17963752" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+=======
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25266525" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+>>>>>>> 0a59059297a6dc7ac9c01c14ab644acc9bb55b00
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32952183" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+=======
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952183" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+>>>>>>> 0a59059297a6dc7ac9c01c14ab644acc9bb55b00
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -393,6 +514,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test_tensorflow.py">
+<<<<<<< HEAD
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
           <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
@@ -453,6 +575,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/generate.py">
+=======
+>>>>>>> 0a59059297a6dc7ac9c01c14ab644acc9bb55b00
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1581">
           <caret line="60" column="48" lean-forward="false" selection-start-line="60" selection-start-column="48" selection-end-line="60" selection-end-column="48" />
@@ -496,6 +620,74 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="279">
           <caret line="9" column="22" lean-forward="false" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tacotron/Modules/CBHG.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1891">
+          <caret line="64" column="51" lean-forward="false" selection-start-line="64" selection-start-column="51" selection-end-line="64" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tacotron/Modules/ConvNet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2387">
+          <caret line="78" column="26" lean-forward="false" selection-start-line="78" selection-start-column="26" selection-end-line="78" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TFCommon/RNNCell.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4557">
+          <caret line="148" column="38" lean-forward="false" selection-start-line="148" selection-start-column="33" selection-end-line="148" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TFCommon/Layers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1209">
+          <caret line="40" column="36" lean-forward="false" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2201">
+          <caret line="80" column="74" lean-forward="false" selection-start-line="80" selection-start-column="69" selection-end-line="80" selection-end-column="74" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/audio.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2511">
+          <caret line="91" column="32" lean-forward="false" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="32" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
@@ -549,6 +741,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-186">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tacotron/Modules/ConvNet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2387">
+          <caret line="78" column="26" lean-forward="false" selection-start-line="78" selection-start-column="26" selection-end-line="78" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TFCommon/Layers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1209">
+          <caret line="40" column="36" lean-forward="false" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/audio.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -559,16 +778,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model.py">
+    <entry file="file://$PROJECT_DIR$/generate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2852">
-          <caret line="102" column="0" lean-forward="true" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+        <state relative-caret-position="2201">
+          <caret line="80" column="74" lean-forward="false" selection-start-line="80" selection-start-column="69" selection-end-line="80" selection-end-column="74" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Tacotron/Modules/CBHG.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1891">
+          <caret line="64" column="51" lean-forward="false" selection-start-line="64" selection-start-column="51" selection-end-line="64" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_tensorflow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="9" column="22" lean-forward="false" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="2852">
+          <caret line="102" column="0" lean-forward="true" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+=======
+        <state relative-caret-position="2511">
+          <caret line="91" column="32" lean-forward="false" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="32" />
+>>>>>>> 0a59059297a6dc7ac9c01c14ab644acc9bb55b00
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/TFCommon/Attention.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -606,11 +859,14 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> 0a59059297a6dc7ac9c01c14ab644acc9bb55b00
     <entry file="file://$PROJECT_DIR$/TFCommon/RNNCell.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4557">
           <caret line="148" column="38" lean-forward="false" selection-start-line="148" selection-start-column="33" selection-end-line="148" selection-end-column="38" />
           <folding>
+<<<<<<< HEAD
             <element signature="e#0#23#0" expanded="false" />
           </folding>
         </state>
@@ -621,11 +877,14 @@
         <state relative-caret-position="1209">
           <caret line="40" column="36" lean-forward="false" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
           <folding>
+=======
+>>>>>>> 0a59059297a6dc7ac9c01c14ab644acc9bb55b00
             <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/generate.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2201">
@@ -687,12 +946,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="31">
           <caret line="114" column="0" lean-forward="false" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/TFCommon/Attention.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="41" column="22" lean-forward="false" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
+>>>>>>> 0a59059297a6dc7ac9c01c14ab644acc9bb55b00
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/TFCommon/DataFeeder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2449">
@@ -790,6 +1056,13 @@
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/TFCommon/tmp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+>>>>>>> 0a59059297a6dc7ac9c01c14ab644acc9bb55b00
         </state>
       </provider>
     </entry>

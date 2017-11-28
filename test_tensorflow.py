@@ -5,8 +5,199 @@ import librosa
 import os
 import scipy.io.wavfile
 import audio
+import random
 
 
+sr = 24000
+
+global data_all_size
+BATCH_SIZE = 1
+EPOCHS = 1000000	# 7142 -> 2M
+EMBED_CLASS = 100
+EMBED_DIM = 256
+STYLE_TOKEN_DIM = 2
+SPC_EMBED_CLASS = 5
+SPC_EMBED_DIM = 32
+ATT_RNN_SIZE = 256
+DEC_RNN_SIZE = 256
+OUTPUT_MEL_DIM = 128	# 128
+OUTPUT_SPEC_DIM = 513 # 513
+LR_RATE = 0.001
+styles_kind = 10
+style_dim = 2
+train_r = 5
+use_same_style = True
+
+
+data_path = 'data_audioBook.npz'
+save_path = "save"
+model_name = "TTS"
+
+def get_next_batch_index():
+    # return [0]
+    global data_all_size
+    return random.randint(0, data_all_size - 1)
+    '''
+    a = list(range(0, data_all_size))
+    random.shuffle(a)
+    # print('batch list:', a[0:min(BATCH_SIZE, data_all_size)])
+    return np.array(a[0:min(BATCH_SIZE, data_all_size)])
+    '''
+
+if __name__ == "__main__":
+
+
+    data = np.load(data_path)
+    data_inp = data['inp']
+    data_inp_mask = data['inp_mask']
+    data_mel_gtruth = data['mel_gtruth']
+    data_spec_gtruth = data['spec_gtruth']
+    data_speaker = data['speaker']
+    data_style = data['style']
+    data_all_style = data['all_style']
+
+    global  data_all_size
+    data_all_size = data_inp.shape[0]
+    batch_index = get_next_batch_index()
+
+    # batch_index = [1]
+
+    print(batch_index)
+    '''
+    batch_inp = data_inp[batch_index]
+    batch_inp_mask = data_inp_mask[batch_index]
+    batch_mel_gtruth = data_mel_gtruth[batch_index]
+    batch_spec_gtruth = data_spec_gtruth[batch_index]
+    batch_speaker = data_speaker[batch_index]
+    batch_style = data_style[batch_index]
+    '''
+
+    batch_inp = np.expand_dims(data_inp[batch_index], axis=0)
+    batch_inp_mask = np.expand_dims(data_inp_mask[batch_index], axis=0)
+    batch_mel_gtruth = np.expand_dims(data_mel_gtruth[batch_index], axis=0)
+    batch_spec_gtruth = np.expand_dims(data_spec_gtruth[batch_index], axis=0)
+    batch_speaker = np.expand_dims(data_speaker[batch_index], axis=0)
+    batch_style = np.expand_dims(data_style[batch_index], axis=0)
+
+    print(batch_inp.shape)
+
+    # repeat_data_all_style = np.tile(data_all_style, (BATCH_SIZE, 1, 1))
+    print('orignal', batch_mel_gtruth.shape, batch_spec_gtruth.shape)
+    orignal_time = batch_mel_gtruth.shape[1]
+    print('orignal', orignal_time, batch_mel_gtruth)
+    good_time = orignal_time // train_r * train_r
+    good_time_mel = np.zeros((batch_mel_gtruth.shape[0], good_time, batch_mel_gtruth.shape[2]))
+    good_time_spec = np.zeros((batch_spec_gtruth.shape[0], good_time, batch_spec_gtruth.shape[2]))
+    for i in range(batch_mel_gtruth.shape[0]):
+        for j in range(good_time):
+            for z in range(batch_mel_gtruth.shape[2]):
+                good_time_mel[i][j][z] = batch_mel_gtruth[i][j][z]
+            for z in range(batch_spec_gtruth.shape[2]):
+                good_time_spec[i][j][z] = batch_spec_gtruth[i][j][z]
+                # good_time_mel[i][j] = batch_mel_gtruth[i][j]
+                # good_time_spec[i][j] = batch_spec_gtruth[i][j]
+    # good_time_mel = batch_mel_gtruth[:][0:good_time]
+    # good_time_spec = batch_spec_gtruth[:][0:good_time]
+    print('11:', good_time_mel.shape)
+    batch_mel_gtruth = good_time_mel
+    batch_spec_gtruth = good_time_spec
+
+    print('22:', batch_mel_gtruth.shape)
+
+    print('good time:', good_time)
+    print('look timestemp:', batch_mel_gtruth.shape)
+    print(batch_mel_gtruth)
+
+
+'''
+
+data_all_size = 4
+BATCH_SIZE = 1
+
+b = np.array([[1], [2], [3], [4]])
+
+def get_next_batch_index():
+    global data_all_size
+    print(data_all_size)
+    a = list(range(0, data_all_size))
+    random.shuffle(a)
+    print('batch list:', a[0:min(BATCH_SIZE, data_all_size)])
+    return np.array(a[0:min(BATCH_SIZE, data_all_size)])
+
+print(b[get_next_batch_index()])
+
+
+'''
+
+
+'''
+
+data_input = np.array([[[1, 1], [2, 2], [3, 3]], [[4, 4], [2, 2], [1, 1]]])
+
+input = tf.placeholder(dtype = np.float32, shape=(None, 3, 2))
+# initializer = tf.random_uniform_initializer(-1, 1)
+# embedding = tf.get_variable(name="embedding", shape=(5, 10),
+#                                         initializer=initializer, dtype=tf.float32)
+# embedded = tf.nn.embedding_lookup(embedding, input)
+
+t = tf.layers.dropout(tf.layers.dense(input, 20, tf.nn.relu))
+
+session = tf.Session()
+session.run(tf.initialize_all_variables())
+
+print(session.run(t, feed_dict={input:data_input}))
+print(np.shape(session.run(t, feed_dict={input:data_input})))
+
+'''
+'''
+
+a = np.array([[0.5, 0.5], [0.4, 0.4], [0.3, 0.3]])
+repeat_a = np.tile(a, (10, 1, 1))
+print(repeat_a)
+'''
+'''
+data_path = 'data.npz'
+train_r = 5
+
+data = np.load(data_path)
+data_inp = data['inp']
+data_inp_mask = data['inp_mask']
+data_mel_gtruth = data['mel_gtruth']
+data_spec_gtruth = data['spec_gtruth']
+data_speaker = data['speaker']
+data_style = data['style']
+
+orignal_time = data_mel_gtruth.shape[1]
+good_time = orignal_time // train_r * train_r
+good_time_mel = np.zeros((data_mel_gtruth.shape[0], good_time, data_mel_gtruth.shape[2]))
+good_time_spec = np.zeros((data_spec_gtruth.shape[0], good_time, data_spec_gtruth.shape[2]))
+print(data_mel_gtruth.shape, good_time_mel.shape)
+print('jj:', data_mel_gtruth[0][0][0])
+for i in range(data_mel_gtruth.shape[0]):
+    for j in range(good_time):
+        for z in range(data_mel_gtruth.shape[2]):
+            # print(i, j, z)
+            good_time_mel[i][j][z] = data_mel_gtruth[i][j][z]
+        for z in range(data_spec_gtruth.shape[2]):
+            good_time_spec[i][j][z] = data_spec_gtruth[i][j][z]
+'''
+# good_time = 2501 // 5 * 5
+# print(good_time)
+#
+# a = np.array([[[1, 2, 3], [1, 2, 3], [1, 2, 3]], [[1, 2, 3], [1, 2, 3], [1, 2, 3]]])
+# b = a[:][0:1][:]
+# print(b)
+# batch_mel_gtruth = batch_mel_gtruth[:][0:good_time]
+# batch_spec_gtruth = batch_spec_gtruth[:][0:good_time]
+
+'''
+
+a = tf.constant(2501)
+b = tf.constant(5)
+c = tf.div(a, b)
+session = tf.Session()
+session.run(tf.initialize_all_variables())
+print(session.run(c))
 
 a = np.array([0, 1, 2, 3, 4])
 b = np.array([2, 4])
@@ -19,7 +210,7 @@ data = np.load(path)
 inp = data['mel_gtruth']
 print(inp)
 
-
+'''
 
 '''
 def griffin_lim(stftm_matrix, shape, min_iter=20, max_iter=50, delta=20):

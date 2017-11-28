@@ -33,9 +33,10 @@ data_folder_path = os.path.realpath(data_folder_path)
 
 for root, sub_dirs, files in os.walk(data_folder_path):
     for wav_file in files:
-        if wav_file[-1] == 'v':
+        if wav_file[-4:] == '.wav':
             wav_file_num += 1
             wav_file = os.path.join(data_folder_path, wav_file)
+            print('??:', wav_file)
             sr, data = scipy.io.wavfile.read(wav_file)
             stftm_matrix = np.abs(librosa.core.stft(data, n_fft=n_fft, hop_length=hop_length, win_length=win_length))
             S = librosa.feature.melspectrogram(data, sr=sr, n_fft=n_fft, hop_length=hop_length)
@@ -75,8 +76,9 @@ data_mel_gtruth = np.array(data_mel_gtruth)
 data_spec_gtruth = np.array(data_spec_gtruth)
 data_speaker = np.array(data_speaker)
 data_style = np.array(data_style)
+data_all_style = np.array(0.5 * np.ones((1, styles_kind, style_dim), dtype=np.float32))
 
 print(data_inp)
 
 np.savez(outfile, inp=data_inp, inp_mask=data_inp_mask, mel_gtruth=data_mel_gtruth, spec_gtruth=data_spec_gtruth,
-         speaker=data_speaker, style=data_style)
+         speaker=data_speaker, style=data_style, all_style = data_all_style)

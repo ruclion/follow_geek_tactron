@@ -7,11 +7,25 @@ import scipy.io.wavfile
 import audio
 import random
 
+styles_kind = 10
+style_dim = 2
+BATCH_SIZE = 8
+
+single_style_token = tf.reshape(tf.get_variable('style_token', shape=(1, styles_kind, style_dim), dtype=tf.float32), (styles_kind, style_dim))
+style_token_list = [single_style_token for i in range(BATCH_SIZE)]
+style_token = tf.stack(style_token_list, axis=0)
+
+session = tf.Session()
+session.run(tf.global_variables_initializer())
+
+print(style_token)
+
+'''
 
 sr = 24000
 
 global data_all_size
-BATCH_SIZE = 1
+BATCH_SIZE = 8
 EPOCHS = 1000000	# 7142 -> 2M
 EMBED_CLASS = 100
 EMBED_DIM = 256
@@ -34,15 +48,10 @@ save_path = "save"
 model_name = "TTS"
 
 def get_next_batch_index():
-    # return [0]
-    global data_all_size
-    return random.randint(0, data_all_size - 1)
-    '''
     a = list(range(0, data_all_size))
     random.shuffle(a)
-    # print('batch list:', a[0:min(BATCH_SIZE, data_all_size)])
     return np.array(a[0:min(BATCH_SIZE, data_all_size)])
-    '''
+
 
 if __name__ == "__main__":
 
@@ -63,51 +72,24 @@ if __name__ == "__main__":
     # batch_index = [1]
 
     print(batch_index)
-    '''
+
     batch_inp = data_inp[batch_index]
     batch_inp_mask = data_inp_mask[batch_index]
     batch_mel_gtruth = data_mel_gtruth[batch_index]
     batch_spec_gtruth = data_spec_gtruth[batch_index]
     batch_speaker = data_speaker[batch_index]
     batch_style = data_style[batch_index]
-    '''
 
-    batch_inp = np.expand_dims(data_inp[batch_index], axis=0)
-    batch_inp_mask = np.expand_dims(data_inp_mask[batch_index], axis=0)
-    batch_mel_gtruth = np.expand_dims(data_mel_gtruth[batch_index], axis=0)
-    batch_spec_gtruth = np.expand_dims(data_spec_gtruth[batch_index], axis=0)
-    batch_speaker = np.expand_dims(data_speaker[batch_index], axis=0)
-    batch_style = np.expand_dims(data_style[batch_index], axis=0)
-
+   
     print(batch_inp.shape)
-
-    # repeat_data_all_style = np.tile(data_all_style, (BATCH_SIZE, 1, 1))
-    print('orignal', batch_mel_gtruth.shape, batch_spec_gtruth.shape)
-    orignal_time = batch_mel_gtruth.shape[1]
-    print('orignal', orignal_time, batch_mel_gtruth)
-    good_time = orignal_time // train_r * train_r
-    good_time_mel = np.zeros((batch_mel_gtruth.shape[0], good_time, batch_mel_gtruth.shape[2]))
-    good_time_spec = np.zeros((batch_spec_gtruth.shape[0], good_time, batch_spec_gtruth.shape[2]))
-    for i in range(batch_mel_gtruth.shape[0]):
-        for j in range(good_time):
-            for z in range(batch_mel_gtruth.shape[2]):
-                good_time_mel[i][j][z] = batch_mel_gtruth[i][j][z]
-            for z in range(batch_spec_gtruth.shape[2]):
-                good_time_spec[i][j][z] = batch_spec_gtruth[i][j][z]
-                # good_time_mel[i][j] = batch_mel_gtruth[i][j]
-                # good_time_spec[i][j] = batch_spec_gtruth[i][j]
-    # good_time_mel = batch_mel_gtruth[:][0:good_time]
-    # good_time_spec = batch_spec_gtruth[:][0:good_time]
-    print('11:', good_time_mel.shape)
-    batch_mel_gtruth = good_time_mel
-    batch_spec_gtruth = good_time_spec
+   
 
     print('22:', batch_mel_gtruth.shape)
 
-    print('good time:', good_time)
+    # print('good time:', good_time)
     print('look timestemp:', batch_mel_gtruth.shape)
     print(batch_mel_gtruth)
-
+'''
 
 '''
 

@@ -6,17 +6,17 @@ from tensorflow.contrib.rnn import MultiRNNCell, ResidualWrapper
 from tensorflow.python.ops import array_ops
 from TFCommon.Attention import BahdanauAttentionModule as AttentionModule
 from TFCommon.Layers import EmbeddingLayer
-import audio, numpy as np
-import tqdm
+import numpy as np
 import random
 import sys
 
 bidirectional_dynamic_rnn = tf.nn.bidirectional_dynamic_rnn
 
+os.environ["CUDA_VISIBLE_DEVICES"] = "0, 1"
 sr = 24000
 
 global data_all_size
-BATCH_SIZE = 1
+BATCH_SIZE = 32
 EPOCHS = 1000000	# 7142 -> 2M
 EMBED_CLASS = 100
 EMBED_DIM = 256
@@ -24,6 +24,7 @@ STYLE_TOKEN_DIM = 2
 SPC_EMBED_CLASS = 5
 SPC_EMBED_DIM = 32
 ATT_RNN_SIZE = 256
+STYLE_ATT_RNN_SIZE = 2
 DEC_RNN_SIZE = 256
 OUTPUT_MEL_DIM = 128	# 128
 OUTPUT_SPEC_DIM = 513 # 513
@@ -61,8 +62,10 @@ class TTS(Model):
 
             with tf.variable_scope("changeToVarible"):
                 global data_all_size
-                self.style_token = tf.get_variable('style_token', shape=(1, styles_kind, style_dim), dtype=tf.float32)
-                tf.assign(self.style_token, style_token_place_holder)
+                self.single_style_token = tf.get_variable('style_token', shape=(styles_kind, style_dim), dtype=tf.float32)
+                tf.assign(self.single_style_token, style_token_place_holder)
+                style_token_list = [self.single_style_token for i in range(BATCH_SIZE)]
+                self.style_token = tf.stack(style_token_list, axis=0)
                 '''
                 i can not use the right way to repeat....  now just make batch_size == 1
                 self.style_token = tf.concat([self.tot_style_token for t in range(BATCH_SIZE)], axis=0)
@@ -84,7 +87,7 @@ class TTS(Model):
         with tf.variable_scope("attention"):
             att_module = AttentionModule(ATT_RNN_SIZE, encoder_output, sequence_length=inp_mask, time_major=False)
         with tf.variable_scope("attention_style"):
-            att_module_style = AttentionModule(ATT_RNN_SIZE, pre_style_token, time_major=False)
+            att_module_style = AttentionModule(STYLE_ATT_RNN_SIZE, pre_style_token, time_major=False)
 
         with tf.variable_scope("decoder"):
             with tf.variable_scope("attentionRnn"):
@@ -173,7 +176,7 @@ with tf.variable_scope("data"):
     speaker = tf.placeholder(name='speaker', shape=(None,), dtype=tf.int32)
     mel_gtruth = tf.placeholder(name="output_mel", shape=(None, None, OUTPUT_MEL_DIM), dtype=tf.float32)
     spec_gtruth = tf.placeholder(name="output_spec", shape=(None, None, OUTPUT_SPEC_DIM), dtype=tf.float32)
-    style_token_place_holder = tf.placeholder(name="input_style", shape=(None, None, None), dtype=tf.float32)
+    style_token_place_holder = tf.placeholder(name="input_style", shape=(None, None), dtype=tf.float32)
 
 with tf.variable_scope("model"):
     train_model = TTS(r=train_r)
@@ -185,19 +188,12 @@ with tf.variable_scope("model"):
         grads_and_vars = opt.compute_gradients(train_model.loss)
         with tf.control_dependencies(tf.get_collection(tf.GraphKeys.UPDATE_OPS)):
             train_upd = opt.apply_gradients(grads_and_vars, global_step=global_step)
-    saver = tf.train.Saver()
+        train_model.saver = tf.train.Saver()
 
 def get_next_batch_index():
-    global data_all_size
-    return random.randint(0, data_all_size - 1)
-    '''
-    # return [0]
-    global data_all_size
     a = list(range(0, data_all_size))
     random.shuffle(a)
-    # print('batch list:', a[0:min(BATCH_SIZE, data_all_size)])
     return np.array(a[0:min(BATCH_SIZE, data_all_size)])
-    '''
 
 
 data_path = 'data_audioBook.npz'
@@ -222,34 +218,31 @@ if __name__ == "__main__":
     global  data_all_size
     data_all_size = data_inp.shape[0]
 
-    train_summary = train_model.summary("train", 2)
+    # train_summary = train_model.summary("train", 2)
     # print('????????????????????????')
     with tf.Session() as sess:
         train_model.sess = sess
+        writer = tf.summary.FileWriter("logs/", train_model.sess.graph)
 
         sess.run([tf.global_variables_initializer(), tf.local_variables_initializer()])
         ckpt = tf.train.get_checkpoint_state(save_path)
         if ckpt:
             ckpt_name = os.path.basename(ckpt.model_checkpoint_path)
-            saver.restore(sess, os.path.join(save_path, ckpt_name))
+            train_model.saver.restore(sess, os.path.join(save_path, ckpt_name))
 
-        writer = tf.summary.FileWriter("log/train", sess.graph)
+        # writer = tf.summary.FileWriter("log/train", sess.graph)
 
 
 
         try:
+            print('init:', data_all_style)
             for cnt in range(EPOCHS):
                 batch_index = get_next_batch_index()
 
-                batch_inp = np.expand_dims(data_inp[batch_index], axis=0)
-                batch_inp_mask = np.expand_dims(data_inp_mask[batch_index], axis=0)
-                batch_mel_gtruth = np.expand_dims(data_mel_gtruth[batch_index], axis=0)
-                batch_spec_gtruth = np.expand_dims(data_spec_gtruth[batch_index], axis=0)
-                batch_speaker = np.expand_dims(data_speaker[batch_index], axis=0)
-                batch_style = np.expand_dims(data_style[batch_index], axis=0)
 
 
-                '''
+
+
                 batch_inp = data_inp[batch_index]
                 batch_inp_mask = data_inp_mask[batch_index]
                 batch_mel_gtruth = data_mel_gtruth[batch_index]
@@ -257,8 +250,8 @@ if __name__ == "__main__":
                 batch_speaker = data_speaker[batch_index]
                 batch_style = data_style[batch_index]
                 # repeat_data_all_style = np.tile(data_all_style, (BATCH_SIZE, 1, 1))
-                '''
 
+                '''
                 orignal_time = batch_mel_gtruth.shape[1]
                 good_time = orignal_time // train_r * train_r
                 good_time_mel = np.zeros((batch_mel_gtruth.shape[0], good_time, batch_mel_gtruth.shape[2]))
@@ -276,12 +269,13 @@ if __name__ == "__main__":
                 print('11:', good_time_mel.shape)
                 batch_mel_gtruth = good_time_mel
                 batch_spec_gtruth = good_time_spec
+                '''
 
-                print('22:', batch_mel_gtruth.shape)
+                # print('22:', batch_mel_gtruth.shape)
 
-                print('good time:', good_time)
-                print('look timestemp:', batch_mel_gtruth.shape)
-                print(batch_mel_gtruth)
+                # print('good time:', good_time)
+                # print('look timestemp:', batch_mel_gtruth.shape)
+                # print('look batck mel gtruth:', batch_mel_gtruth)
 
 
                 # print(batch_index)
@@ -297,34 +291,33 @@ if __name__ == "__main__":
 
 
                 print('start:', cnt, EPOCHS)
-                _, loss_eval, global_step_eval, new_style = sess.run([train_upd, train_model.loss, global_step, train_model.style_token],
-                                                                     feed_dict={inp:batch_inp, inp_mask:batch_inp_mask,
-                                                                                speaker:batch_speaker, mel_gtruth:batch_mel_gtruth,
-                                                                                spec_gtruth:batch_spec_gtruth, style_token_place_holder:data_all_style})
-                # print('old style:', data_all_style)
-                # print('new_style_val is:', new_style)
-                # print(np.shape(new_style))
+                _, loss_eval, global_step_eval, new_style = sess.run([train_upd, train_model.loss, global_step, train_model.single_style_token],
+                                                                         feed_dict={inp:batch_inp, inp_mask:batch_inp_mask,
+                                                                                    speaker:batch_speaker, mel_gtruth:batch_mel_gtruth,
+                                                                                    spec_gtruth:batch_spec_gtruth, style_token_place_holder:data_all_style})
+
                 data_all_style = new_style
                 total_loss += loss_eval
 
-                if global_step_eval % 50 == 0:
-                    train_sum_eval = sess.run(train_summary)
-                    writer.add_summary(train_sum_eval, global_step_eval)
+                # if global_step_eval % 50 == 0:
+                #     train_sum_eval = sess.run(train_summary)
+                #     writer.add_summary(train_sum_eval, global_step_eval)
                 if global_step_eval % 2000 == 0:
                     train_model.save(save_path, global_step_eval)
                 if global_step_eval == 100000:
                     break
                 mean_loss = total_loss / BATCH_SIZE
                 with open('train_loss.txt', 'a') as f:
-                    f.write('{:f}\n'.format(mean_loss))
+                    f.write('{:f}\n'.format(loss_eval))
                 f = open('train_style.txt', 'a')
                 print('\nglobal_step_eval---', global_step_eval, '\n', file=f)
                 print(data_all_style, file=f)
                 sys.stdout.flush()
 
 
-                train_epoch_summary_eval = sess.run(train_epoch_summary, feed_dict={mean_loss_holder: mean_loss})
+                train_epoch_summary_eval = sess.run(train_epoch_summary, feed_dict={mean_loss_holder: loss_eval})
                 writer.add_summary(train_epoch_summary_eval, cnt)
+
 
 
 

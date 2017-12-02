@@ -33,6 +33,13 @@ styles_kind = 10
 style_dim = 2
 train_r = 5
 use_same_style = True
+
+
+data_path = 'data_audioBook.npz'
+save_path = "save"
+model_name = "TTS"
+data_file_slice_num = 23
+
 #LR_RATE = 0.0005
 #LR_RATE = 0.00025
 #LR_RATE = 0.0001
@@ -191,35 +198,48 @@ with tf.variable_scope("model"):
         train_model.saver = tf.train.Saver()
 
 def get_next_batch_index():
-    a = list(range(0, data_all_size))
-    random.shuffle(a)
-    return np.array(a[0:min(BATCH_SIZE, data_all_size)])
+    id = random.randint(0, data_file_slice_num - 1)
+    batch_data_path = 'id' + str(id) + data_path
+    pre_folder = 'big_data'
+    if not os.path.exists(pre_folder):
+        pre_folder = 'F:\\big_data'
 
-
-data_path = 'data_audioBook.npz'
-save_path = "save"
-model_name = "TTS"
-
-if __name__ == "__main__":
-    if not os.path.exists(save_path):
-        os.makedirs(save_path)
-
-
-    #read data
-    data = np.load(data_path)
+    data = np.load(os.path.join(pre_folder, batch_data_path))
     data_inp = data['inp']
     data_inp_mask = data['inp_mask']
     data_mel_gtruth = data['mel_gtruth']
     data_spec_gtruth = data['spec_gtruth']
     data_speaker = data['speaker']
     data_style = data['style']
-    data_all_style = data['all_style']
 
-    global  data_all_size
+    global data_all_size
     data_all_size = data_inp.shape[0]
 
-    # train_summary = train_model.summary("train", 2)
-    # print('????????????????????????')
+    a = list(range(0, data_all_size))
+    random.shuffle(a)
+    batch_index = np.array(a[0:BATCH_SIZE])
+
+
+
+    batch_inp = data_inp[batch_index]
+    batch_inp_mask = data_inp_mask[batch_index]
+    batch_mel_gtruth = data_mel_gtruth[batch_index]
+    batch_spec_gtruth = data_spec_gtruth[batch_index]
+    batch_speaker = data_speaker[batch_index]
+    batch_style = data_style[batch_index]
+
+    return batch_inp, batch_inp_mask, batch_mel_gtruth, batch_spec_gtruth, batch_speaker, batch_style
+
+
+
+
+
+
+if __name__ == "__main__":
+    if not os.path.exists(save_path):
+        os.makedirs(save_path)
+
+
     with tf.Session() as sess:
         train_model.sess = sess
         writer = tf.summary.FileWriter("logs/", train_model.sess.graph)
@@ -235,54 +255,13 @@ if __name__ == "__main__":
 
 
         try:
+            data_all_style = np.array(0.5 * np.ones((styles_kind, style_dim), dtype=np.float32))
             print('init:', data_all_style)
             for cnt in range(EPOCHS):
-                batch_index = get_next_batch_index()
 
 
 
-
-
-                batch_inp = data_inp[batch_index]
-                batch_inp_mask = data_inp_mask[batch_index]
-                batch_mel_gtruth = data_mel_gtruth[batch_index]
-                batch_spec_gtruth = data_spec_gtruth[batch_index]
-                batch_speaker = data_speaker[batch_index]
-                batch_style = data_style[batch_index]
-                # repeat_data_all_style = np.tile(data_all_style, (BATCH_SIZE, 1, 1))
-
-                '''
-                orignal_time = batch_mel_gtruth.shape[1]
-                good_time = orignal_time // train_r * train_r
-                good_time_mel = np.zeros((batch_mel_gtruth.shape[0], good_time, batch_mel_gtruth.shape[2]))
-                good_time_spec = np.zeros((batch_spec_gtruth.shape[0], good_time, batch_spec_gtruth.shape[2]))
-                for i in range(batch_mel_gtruth.shape[0]):
-                    for j in range(good_time):
-                        for z in range(batch_mel_gtruth.shape[2]):
-                            good_time_mel[i][j][z] = batch_mel_gtruth[i][j][z]
-                        for z in range(batch_spec_gtruth.shape[2]):
-                            good_time_spec[i][j][z] = batch_spec_gtruth[i][j][z]
-                        # good_time_mel[i][j] = batch_mel_gtruth[i][j]
-                        # good_time_spec[i][j] = batch_spec_gtruth[i][j]
-                # good_time_mel = batch_mel_gtruth[:][0:good_time]
-                # good_time_spec = batch_spec_gtruth[:][0:good_time]
-                print('11:', good_time_mel.shape)
-                batch_mel_gtruth = good_time_mel
-                batch_spec_gtruth = good_time_spec
-                '''
-
-                # print('22:', batch_mel_gtruth.shape)
-
-                # print('good time:', good_time)
-                # print('look timestemp:', batch_mel_gtruth.shape)
-                # print('look batck mel gtruth:', batch_mel_gtruth)
-
-
-                # print(batch_index)
-                # print(batch_inp)
-                # print(batch_inp_mask)
-                # print(batch_spec_gtruth)
-                # print(batch_style)
+                batch_inp, batch_inp_mask, batch_mel_gtruth, batch_spec_gtruth, batch_speaker, batch_style = get_next_batch_index()
 
                 mean_loss_holder = tf.placeholder(shape=(), dtype=tf.float32, name='mean_loss')
                 train_epoch_summary = tf.summary.scalar('epoch/train/loss', mean_loss_holder)

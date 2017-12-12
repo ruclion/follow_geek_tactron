@@ -21,6 +21,7 @@ def de_emphasis(wav_arr, alpha=0.97):
     return ret
 
 def invert_spectrogram(spec, coef=1.2, out_fn=None, sr=16000, return_float=True, de_emp=True):
+    spec = np.reshape(spec, (spec.shape[-2], spec.shape[-1]))
     spec = np.power(np.exp(spec.T), coef)
     wav_dots = (spec.shape[1] - 1) * hop_length
     y = np.random.uniform(low=-1, high=1, size=(wav_dots,))

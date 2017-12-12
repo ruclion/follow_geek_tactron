@@ -9,14 +9,18 @@ from TFCommon.Layers import EmbeddingLayer
 import numpy as np
 import random
 import sys
+import gc
 
 bidirectional_dynamic_rnn = tf.nn.bidirectional_dynamic_rnn
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "0, 1"
 sr = 24000
 
-global data_all_size
-BATCH_SIZE = 32
+data_all_size = 4
+
+fixed_txt_len = 64
+
+BATCH_SIZE = 4
 EPOCHS = 1000000	# 7142 -> 2M
 EMBED_CLASS = 100
 EMBED_DIM = 256
@@ -36,9 +40,18 @@ use_same_style = True
 
 
 data_path = 'data_audioBook.npz'
-save_path = "save"
+save_path = "save_fixed_txt_lenth_no_zeromask"
 model_name = "TTS"
+start_data_file_slice_num = 0
 data_file_slice_num = 23
+
+use_global_data = False
+global_data = None
+now_id = 3
+
+
+
+
 
 #LR_RATE = 0.0005
 #LR_RATE = 0.00025
@@ -86,6 +99,7 @@ class TTS(Model):
                 pre_ed_inp = tf.layers.dropout(tf.layers.dense(pre_ed_inp, 128, tf.nn.relu), training=self.training)
 
                 pre_style_token = tf.layers.dropout(tf.layers.dense(self.style_token, STYLE_TOKEN_DIM, tf.nn.relu), training=self.training)
+
 
             with tf.variable_scope("CBHG"):
                 # batch major
@@ -178,12 +192,12 @@ class TTS(Model):
 
 
 with tf.variable_scope("data"):
-    inp = tf.placeholder(name="input", shape=(None, None), dtype=tf.int32)
+    inp = tf.placeholder(name="input", shape=(None, fixed_txt_len), dtype=tf.int32)
     inp_mask = tf.placeholder(name="inp_mask", shape=(None,), dtype=tf.int32)
     speaker = tf.placeholder(name='speaker', shape=(None,), dtype=tf.int32)
     mel_gtruth = tf.placeholder(name="output_mel", shape=(None, None, OUTPUT_MEL_DIM), dtype=tf.float32)
     spec_gtruth = tf.placeholder(name="output_spec", shape=(None, None, OUTPUT_SPEC_DIM), dtype=tf.float32)
-    style_token_place_holder = tf.placeholder(name="input_style", shape=(None, None), dtype=tf.float32)
+    style_token_place_holder = tf.placeholder(name="input_style", shape=(styles_kind, style_dim), dtype=tf.float32)
 
 with tf.variable_scope("model"):
     train_model = TTS(r=train_r)
@@ -198,37 +212,87 @@ with tf.variable_scope("model"):
         train_model.saver = tf.train.Saver()
 
 def get_next_batch_index():
+
     id = random.randint(0, data_file_slice_num - 1)
+    if use_global_data:
+        global  now_id
+        id = now_id
+    '''
     batch_data_path = 'id' + str(id) + data_path
     pre_folder = 'big_data'
     if not os.path.exists(pre_folder):
         pre_folder = 'F:\\big_data'
+    '''
 
-    data = np.load(os.path.join(pre_folder, batch_data_path))
-    data_inp = data['inp']
-    data_inp_mask = data['inp_mask']
-    data_mel_gtruth = data['mel_gtruth']
-    data_spec_gtruth = data['spec_gtruth']
-    data_speaker = data['speaker']
-    data_style = data['style']
+    batch_data_path = 'small_data.npz'
+    pre_folder = 'small_data'
+    if not os.path.exists(pre_folder):
+        pre_folder = 'F:\\big_data'
 
-    global data_all_size
-    data_all_size = data_inp.shape[0]
+    if use_global_data:
+        global global_data
+        if global_data is None:
+            global_data = np.load(os.path.join(pre_folder, batch_data_path))
+        data_inp = global_data['inp']
+        data_inp_mask = global_data['inp_mask']
+        data_mel_gtruth = global_data['mel_gtruth']
+        data_spec_gtruth = global_data['spec_gtruth']
+        data_speaker = global_data['speaker']
+        data_style = global_data['style']
 
-    a = list(range(0, data_all_size))
-    random.shuffle(a)
-    batch_index = np.array(a[0:BATCH_SIZE])
+
+
+        a = list(range(start_data_file_slice_num, data_all_size))
+        random.shuffle(a)
+        batch_index = np.array(a[0:BATCH_SIZE])
+
+        batch_inp = data_inp[batch_index]
+        batch_inp_mask = data_inp_mask[batch_index]
+        batch_mel_gtruth = data_mel_gtruth[batch_index]
+        batch_spec_gtruth = data_spec_gtruth[batch_index]
+        batch_speaker = data_speaker[batch_index]
+        batch_style = data_style[batch_index]
+        print('use this!!!!!!!!')
+
+        return batch_inp, batch_inp_mask, batch_mel_gtruth, batch_spec_gtruth, batch_speaker, batch_style
+
+    else:
+        with np.load(os.path.join(pre_folder, batch_data_path)) as data:
+            # data = np.load(os.path.join(pre_folder, batch_data_path))
+            data_inp = data['inp']
+            data_inp_mask = data['inp_mask']
+            data_mel_gtruth = data['mel_gtruth']
+            data_spec_gtruth = data['spec_gtruth']
+            data_speaker = data['speaker']
+            data_style = data['style']
 
 
 
-    batch_inp = data_inp[batch_index]
-    batch_inp_mask = data_inp_mask[batch_index]
-    batch_mel_gtruth = data_mel_gtruth[batch_index]
-    batch_spec_gtruth = data_spec_gtruth[batch_index]
-    batch_speaker = data_speaker[batch_index]
-    batch_style = data_style[batch_index]
 
-    return batch_inp, batch_inp_mask, batch_mel_gtruth, batch_spec_gtruth, batch_speaker, batch_style
+            a = list()
+            for i in range(data_all_size):
+                if data_inp_mask[i] > 0:
+                    a.append(i)
+            random.shuffle(a)
+            batch_index = np.array(a[0:BATCH_SIZE])
+
+            batch_inp = data_inp[batch_index]
+            batch_inp_mask = data_inp_mask[batch_index]
+            batch_mel_gtruth = data_mel_gtruth[batch_index]
+            batch_spec_gtruth = data_spec_gtruth[batch_index]
+            batch_speaker = data_speaker[batch_index]
+            batch_style = data_style[batch_index]
+
+
+
+            del data_inp, data_inp_mask, data_mel_gtruth, data_spec_gtruth, data_speaker, data_style, a, batch_index
+
+
+
+            return batch_inp, batch_inp_mask, batch_mel_gtruth, batch_spec_gtruth, batch_speaker, batch_style
+
+
+
 
 
 
@@ -249,6 +313,7 @@ if __name__ == "__main__":
         if ckpt:
             ckpt_name = os.path.basename(ckpt.model_checkpoint_path)
             train_model.saver.restore(sess, os.path.join(save_path, ckpt_name))
+            print('restore path:', ckpt_name)
 
         # writer = tf.summary.FileWriter("log/train", sess.graph)
 
@@ -262,6 +327,14 @@ if __name__ == "__main__":
 
 
                 batch_inp, batch_inp_mask, batch_mel_gtruth, batch_spec_gtruth, batch_speaker, batch_style = get_next_batch_index()
+                print(batch_inp.shape, batch_inp_mask.shape, batch_mel_gtruth.shape, batch_spec_gtruth.shape,
+                      batch_speaker.shape, batch_style.shape)
+                print(np.max(batch_inp), np.max(batch_inp_mask), np.max(batch_mel_gtruth), np.max(batch_spec_gtruth),
+                      np.max(batch_speaker), np.max(batch_style))
+                print(np.min(batch_inp), np.min(batch_inp_mask), np.min(batch_mel_gtruth), np.min(batch_spec_gtruth),
+                      np.min(batch_speaker), np.min(batch_style))
+
+                print('all_style:', np.min(data_all_style), np.max(data_all_style), np.shape(data_all_style))
 
                 mean_loss_holder = tf.placeholder(shape=(), dtype=tf.float32, name='mean_loss')
                 train_epoch_summary = tf.summary.scalar('epoch/train/loss', mean_loss_holder)
@@ -278,20 +351,27 @@ if __name__ == "__main__":
                 data_all_style = new_style
                 total_loss += loss_eval
 
+                del batch_inp, batch_inp_mask, batch_mel_gtruth, batch_spec_gtruth, batch_speaker, batch_style
+
+                gc.collect()
+
                 # if global_step_eval % 50 == 0:
                 #     train_sum_eval = sess.run(train_summary)
                 #     writer.add_summary(train_sum_eval, global_step_eval)
-                if global_step_eval % 2000 == 0:
+                if global_step_eval % 50 == 0:
                     train_model.save(save_path, global_step_eval)
+                    np.savez(os.path.join(save_path, 'style_token_' + str(global_step_eval) + '.npz'), all_style = data_all_style)
                 if global_step_eval == 100000:
                     break
                 mean_loss = total_loss / BATCH_SIZE
                 with open('train_loss.txt', 'a') as f:
                     f.write('{:f}\n'.format(loss_eval))
-                f = open('train_style.txt', 'a')
-                print('\nglobal_step_eval---', global_step_eval, '\n', file=f)
-                print(data_all_style, file=f)
-                sys.stdout.flush()
+                with open('train_style.txt', 'a') as f:
+                    f = open('train_style.txt', 'a')
+                    print('\nglobal_step_eval---', global_step_eval, '\n', file=f)
+                    print(data_all_style, file=f)
+                    sys.stdout.flush()
+
 
 
                 train_epoch_summary_eval = sess.run(train_epoch_summary, feed_dict={mean_loss_holder: loss_eval})

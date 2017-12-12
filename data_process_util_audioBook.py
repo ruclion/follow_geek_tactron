@@ -43,6 +43,7 @@ data_txt_folder_path = os.path.realpath(os.path.join(data_folder_path, txt_folde
 def generor_init(id):
     global max_timestamp, data_inp_mask, data_inp, data_mel_gtruth, data_spec_gtruth, data_speaker, data_style
     global wav_file_num, max_len, tot_nouse_num
+    max_len = 64
     max_timestamp = (max_timestamp + 4) // 5 * 5
     print('tot num:', wav_file_num, max_len, tot_nouse_num, max_timestamp)
     for i in range(wav_file_num):
@@ -58,7 +59,7 @@ def generor_init(id):
             tmp_spec_list.append(np.zeros_like(data_spec_gtruth[i][0], dtype=np.float32))
         data_mel_gtruth[i] = np.array(tmp_mel_list)
         data_spec_gtruth[i] = np.array(tmp_spec_list)
-        print('now:', data_mel_gtruth[i].shape, data_spec_gtruth[i].shape)
+        # print('now:', data_mel_gtruth[i].shape, data_spec_gtruth[i].shape)
 
         data_inp[i] = np.array(data_inp[i])
 
@@ -74,6 +75,11 @@ def generor_init(id):
 
     np.savez(os.path.join(prefix_folder, 'id'+str(id)+outfile), inp=data_inp, inp_mask=data_inp_mask, mel_gtruth=data_mel_gtruth, spec_gtruth=data_spec_gtruth,
              speaker=data_speaker, style=data_style, all_style=data_all_style)
+
+
+    with open('tmp' + str(id) + '.txt', 'w') as f:
+        f.write(str(char_map))
+
 
     data_inp = []
     data_inp_mask = []
@@ -96,11 +102,11 @@ for root, sub_dirs, files in os.walk(data_wav_folder_path):
         for single_wav_path in os.listdir(os.path.join(data_wav_folder_path, name_dir)):
             wav_file_num += 1
             wav_path = os.path.join(os.path.join(data_wav_folder_path, name_dir), single_wav_path)
-            print(wav_path)
+            # print(wav_path)
             sr, data = scipy.io.wavfile.read(wav_path)
             stftm_matrix = np.log(np.abs(librosa.core.stft(data, n_fft=n_fft, hop_length=hop_length, win_length=win_length)))
             S = np.log(librosa.feature.melspectrogram(data, sr=sr, n_fft=n_fft, hop_length=hop_length))
-            stftm_matrix = stftm_matrix.TZ6cv
+            stftm_matrix = stftm_matrix.T
             S = S.T
 
             txt_file = os.path.join(data_txt_folder_path, name_dir, single_wav_path)
@@ -109,13 +115,13 @@ for root, sub_dirs, files in os.walk(data_wav_folder_path):
             with open(txt_file, "r") as f:
                 text = f.read()
             if len(text) > 64:
-                print(text, len(text))
+                # print(text, len(text))
                 wav_file_num -= 1
                 tot_nouse_num += 1
                 continue
             text_map = []
             max_len = max(max_len, len(text))
-            print(type(stftm_matrix), stftm_matrix.shape)
+            # print(type(stftm_matrix), stftm_matrix.shape)
             max_timestamp = max(max_timestamp, stftm_matrix.shape[0])
             data_spec_gtruth.append(stftm_matrix)
             data_mel_gtruth.append(S)

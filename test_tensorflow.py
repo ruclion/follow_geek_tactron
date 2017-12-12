@@ -1,3 +1,39 @@
+import numpy as np
+'''
+a = np.arange(24)
+a = np.reshape(a, (2, 3, 4))
+b = a[:, -1]
+print(a)
+print(b)
+'''
+
+f = np.load('style_token.npz')
+f2 = np.load('test_small_data.npz')
+
+data_inp = f2['inp']
+data_inp_mask = f2['inp_mask']
+
+print(data_inp)
+print(data_inp_mask)
+print(f['all_style'])
+
+'''
+
+f = open('tmp.txt','r')
+a = f.read()
+d = eval(a)
+
+f.close()
+
+print(d[' '])
+'''
+'''
+a = np.array([1, 2, 3])
+b = a[[0, 2]]
+del a
+print(b)
+'''
+'''
 import tensorflow as tf
 
 import numpy as np
@@ -19,7 +55,7 @@ session = tf.Session()
 session.run(tf.global_variables_initializer())
 
 print(style_token)
-
+'''
 '''
 
 sr = 24000

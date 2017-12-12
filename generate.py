@@ -184,6 +184,9 @@ if __name__ == "__main__":
             with open(txt_path, "a") as f:
                 f.write("%d. %s\n" % (cnt, got_utt))
             speaker_code, tok, lenar = utt2tok(got_utt)
+
+
+
             feed_dict = {inp: tok, inp_mask: lenar, speaker:speaker_code}
             print("Generating ...")
             pred_out = sess.run(model.out_stftm, feed_dict=feed_dict)

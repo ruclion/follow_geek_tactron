@@ -20,9 +20,9 @@ for _line in data:
             tmp.append(var)
     #print(tmp[8])
     '''
-    if _line[0:2] == '[[':
-        print(float(_line[2:10]))
-        y.append(float(_line[2:10]))
+    if _line[0:3] == '[[[':
+        print(float(_line[3:10]))
+        y.append(float(_line[3:10]))
         cnt += 1
         x.append(cnt)
 

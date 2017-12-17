@@ -1,10 +1,194 @@
 import numpy as np
+import os
+import time
+
+import tensorflow as tf
+
+
+
+def variable_summaries(var):
+  """Attach a lot of summaries to a Tensor (for TensorBoard visualization)."""
+  with tf.name_scope('summaries'):
+    mean = tf.reduce_mean(var)
+    tf.summary.scalar('mean', mean)
+    with tf.name_scope('stddev'):
+      stddev = tf.sqrt(tf.reduce_mean(tf.square(var - mean)))
+    tf.summary.scalar('stddev', stddev)
+    tf.summary.scalar('max', tf.reduce_max(var))
+    tf.summary.scalar('min', tf.reduce_min(var))
+    tf.summary.histogram('histogram', var)
+
+
+x = tf.placeholder(name='input', shape=(None, 3), dtype=tf.float32)
+w = tf.get_variable('w', (3, 1), dtype=tf.float32)
+b = tf.get_variable('b', (1), dtype=tf.float32)
+y = tf.sigmoid(tf.matmul(x, w) + b)
+variable_summaries(w)
+
+tf.summary.histogram('weight', w)
+tf.summary.histogram('biases', b)
+
+
+
+
+
+
+
+with tf.Session() as sess:
+    sess.run(tf.global_variables_initializer())
+    in_x = np.ones((2, 3), dtype=np.float32)
+    print(in_x)
+    summary_writer = tf.summary.FileWriter('test_logs/', sess.graph)
+    for i in range(10):
+
+        out_y = sess.run(y, feed_dict={x:in_x})
+
+        merged_summary_op = tf.summary.merge_all()
+
+
+
+        summary_str = sess.run(merged_summary_op)
+        summary_writer.add_summary(summary_str, i)
+
+
+    # tensor_t = tf.convert_to_tensor(t, dtype=tf.float32)
+    # print('t is:', tensor_t)
+    # print('t val:', sess.run(tensor_t))
+
+
+    # a = tensor_t
+
+    # print('temp', sess.run(temp))
+
+
 '''
+x = time.time()
+print(time.time())
+
+a = 0
+for i in range(1000000):
+    a += 1
+    a /= 2
+
+y = time.time()
+
+print(y)
+print('imp:', y - x)
+'''
+
+'''
+
+slice_data_size = 256
+BATCH_SIZE = 32
+slice_num = 23
+batch_id = 0
+batch_no = 0
+batch_idx = None
+global_data = None
+train_r = 5
+OUTPUT_MEL_DIM = 128	# 128
+OUTPUT_SPEC_DIM = 513 # 513
+
+
+
+
+
+def get_next_batch_index():
+    global slice_data_size, BATCH_SIZE, slice_num, batch_id, batch_no, batch_idx
+
+    data_path = 'data_audioBook.npz'
+    pre_folder = 'big_data'
+    if not os.path.exists(pre_folder):
+        pre_folder = 'F:\\big_data'
+
+    if batch_no == slice_data_size:
+        batch_no = 0
+        batch_id = (batch_id + 1) % slice_num
+
+    if batch_no == 0:
+        batch_idx = np.random.permutation(slice_data_size)
+        print(batch_idx)
+        global global_data
+        if global_data is not None:
+            global_data.close()
+        batch_data_path = 'id' + str(batch_id) + data_path
+        print(os.path.join(pre_folder, batch_data_path))
+        global_data = np.load(os.path.join(pre_folder, batch_data_path))
+
+    zero_data_inp = global_data['inp'][batch_idx[batch_no:batch_no + BATCH_SIZE]]
+    data_inp_mask = global_data['inp_mask'][batch_idx[batch_no:batch_no + BATCH_SIZE]]
+    data_timestamp = global_data['timestamp'][batch_idx[batch_no:batch_no + BATCH_SIZE]]
+    zero_data_mel_gtruth = global_data['mel_gtruth'][batch_idx[batch_no:batch_no + BATCH_SIZE]]
+    zero_data_spec_gtruth = global_data['spec_gtruth'][batch_idx[batch_no:batch_no + BATCH_SIZE]]
+    data_speaker = global_data['speaker'][batch_idx[batch_no:batch_no + BATCH_SIZE]]
+
+    time_len = np.max(data_timestamp)
+    print('original now time:', time_len)
+    time_len = (time_len + train_r - 1) // train_r * train_r
+
+    txt_len = np.max(data_inp_mask)
+    print(txt_len)
+
+    data_mel_gtruth = zero_data_mel_gtruth[:,0:time_len, :]
+    data_spec_gtruth = zero_data_spec_gtruth[:, 0:time_len, :]
+    data_inp = zero_data_inp[:, 0:txt_len]
+
+    # a_data_mel_gtruth = np.zeros((BATCH_SIZE, time_len, OUTPUT_MEL_DIM), dtype=np.float32)
+    # a_data_spec_gtruth = np.zeros((BATCH_SIZE, time_len, OUTPUT_SPEC_DIM), dtype=np.float32)
+    # a_data_inp = np.zeros((BATCH_SIZE, txt_len), dtype=np.int32)
+    #
+    #
+    # for i in range(BATCH_SIZE):
+    #     a_data_mel_gtruth[i] = zero_data_mel_gtruth[i][0:time_len]
+    #     a_data_spec_gtruth[i] = zero_data_spec_gtruth[i][0:time_len]
+    #     a_data_inp[i] = zero_data_inp[i][0:txt_len]
+    #
+    # print(a_data_inp)
+    batch_no += BATCH_SIZE
+    return data_inp, data_inp_mask, data_mel_gtruth, data_spec_gtruth
+
+
+for i in range(5):
+    data_inp, data_inp_mask, data_mel_gtruth, data_spec_gtruth = get_next_batch_index()
+    print('inp', data_inp)
+    print('mel', data_mel_gtruth)
+'''
+'''
+import tensorflow as tf
+
+a = tf.truncated_normal(shape=(1, 10, 2), mean=0.5, stddev=0.1, dtype=tf.float32,seed=32, name = 'style_token')
+# t = np.random.normal(0.5, 0.1, (1, 10, 2))
+
+# temp = tf.tile(a,(3, 1, 1))
+with tf.Session() as sess:
+    sess.run(tf.global_variables_initializer())
+    # tensor_t = tf.convert_to_tensor(t, dtype=tf.float32)
+    # print('t is:', tensor_t)
+    # print('t val:', sess.run(tensor_t))
+
+
+    # a = tensor_t
+    print(a)
+    print('a:', sess.run(a))
+    # print('temp', sess.run(temp))
+
+'''
+
+
+
+'''
+
 a = np.arange(24)
 a = np.reshape(a, (2, 3, 4))
-b = a[:, -1]
+
 print(a)
+
+print('fff')
+b = np.zeros((2, 2, 4))
+for i in range(2):
+    b[i] = a[i][0:2]
 print(b)
+'''
 '''
 
 f = np.load('style_token.npz')
@@ -17,6 +201,7 @@ print(data_inp)
 print(data_inp_mask)
 print(f['all_style'])
 
+'''
 '''
 
 f = open('tmp.txt','r')

@@ -1,6 +1,0 @@
-model_checkpoint_path: "TTS-28000"
-all_model_checkpoint_paths: "TTS-27200"
-all_model_checkpoint_paths: "TTS-27400"
-all_model_checkpoint_paths: "TTS-27600"
-all_model_checkpoint_paths: "TTS-27800"
-all_model_checkpoint_paths: "TTS-28000"

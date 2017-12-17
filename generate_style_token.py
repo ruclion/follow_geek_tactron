@@ -90,7 +90,7 @@ class TTS(Model):
 
             with tf.variable_scope("changeToVarible"):
                 global data_all_size
-                self.single_style_token = tf.get_variable('style_token', shape=(styles_kind, style_dim), dtype=tf.float32)
+                self.single_style_token = tf.get_variable('style_token', shape=(1, styles_kind, style_dim), dtype=tf.float32)
                 tf.assign(self.single_style_token, style_token_place_holder)
                 style_token_list = [self.single_style_token for i in range(BATCH_SIZE)]
                 self.style_token = tf.stack(style_token_list, axis=0)
@@ -99,8 +99,9 @@ class TTS(Model):
                 pre_ed_inp = tf.layers.dropout(tf.layers.dense(embed_inp, 256, tf.nn.relu), training=self.training)
                 pre_ed_inp = tf.layers.dropout(tf.layers.dense(pre_ed_inp, 128, tf.nn.relu), training=self.training)
 
-                pre_style_token = tf.layers.dropout(tf.layers.dense(self.style_token, STYLE_TOKEN_DIM, tf.nn.relu),
-                                                    training=self.training)
+                pre_style_token = self.style_token
+                # pre_style_token = tf.layers.dropout(tf.layers.dense(self.style_token, STYLE_TOKEN_DIM, tf.nn.relu),
+                #                                     training=self.training)
 
             with tf.variable_scope("CBHG"):
                 # batch major

@@ -25,6 +25,7 @@ data_inp = []
 data_inp_mask = []
 data_mel_gtruth = []
 data_spec_gtruth = []
+data_timestamp = []
 data_speaker = []
 data_style = []
 
@@ -41,7 +42,7 @@ data_txt_folder_path = os.path.realpath(os.path.join(data_folder_path, txt_folde
 
 
 def generor_init(id):
-    global max_timestamp, data_inp_mask, data_inp, data_mel_gtruth, data_spec_gtruth, data_speaker, data_style
+    global max_timestamp, data_inp_mask, data_inp, data_mel_gtruth, data_spec_gtruth, data_timestamp, data_speaker, data_style
     global wav_file_num, max_len, tot_nouse_num
     max_len = 64
     max_timestamp = (max_timestamp + 4) // 5 * 5
@@ -67,6 +68,7 @@ def generor_init(id):
     data_inp_mask = np.array(data_inp_mask)
     data_mel_gtruth = np.array(data_mel_gtruth)
     data_spec_gtruth = np.array(data_spec_gtruth)
+    data_timestamp = np.array(data_timestamp)
     data_speaker = np.array(data_speaker)
     data_style = np.array(data_style)
     data_all_style = np.array(0.5 * np.ones((styles_kind, style_dim), dtype=np.float32))
@@ -74,7 +76,7 @@ def generor_init(id):
     print('final:', data_inp.shape, data_inp.shape, data_mel_gtruth.shape, data_spec_gtruth.shape, data_all_style.shape)
 
     np.savez(os.path.join(prefix_folder, 'id'+str(id)+outfile), inp=data_inp, inp_mask=data_inp_mask, mel_gtruth=data_mel_gtruth, spec_gtruth=data_spec_gtruth,
-             speaker=data_speaker, style=data_style, all_style=data_all_style)
+             speaker=data_speaker, style=data_style, all_style=data_all_style, timestamp = data_timestamp)
 
 
     with open('tmp' + str(id) + '.txt', 'w') as f:
@@ -85,6 +87,7 @@ def generor_init(id):
     data_inp_mask = []
     data_mel_gtruth = []
     data_spec_gtruth = []
+    data_timestamp = []
     data_speaker = []
     data_style = []
 
@@ -114,7 +117,7 @@ for root, sub_dirs, files in os.walk(data_wav_folder_path):
             # print(txt_file)
             with open(txt_file, "r") as f:
                 text = f.read()
-            if len(text) > 64:
+            if len(text) > 64 or len(text) == 0 or stftm_matrix.shape[0] == 0:
                 # print(text, len(text))
                 wav_file_num -= 1
                 tot_nouse_num += 1
@@ -126,6 +129,7 @@ for root, sub_dirs, files in os.walk(data_wav_folder_path):
             data_spec_gtruth.append(stftm_matrix)
             data_mel_gtruth.append(S)
             data_inp_mask.append(len(text))
+            data_timestamp.append(stftm_matrix.shape[0])
 
             for i in range(len(text)):
                 if text[i] in char_map:
@@ -144,41 +148,5 @@ for root, sub_dirs, files in os.walk(data_wav_folder_path):
                 rand_time += 1
     break
 
-
-'''
-max_timestamp = (max_timestamp + 4) // 5 * 5
-print('tot num:', wav_file_num, max_len, tot_nouse_num, max_timestamp)
-for i in range(wav_file_num):
-    # max_len - data_inp_mask[i]
-    for j1 in range(max_len - data_inp_mask[i]):
-        data_inp[i].append(0)
-    tmp_mel_list = data_mel_gtruth[i].tolist()
-    tmp_spec_list = data_spec_gtruth[i].tolist()
-    times = max_timestamp - data_mel_gtruth[i].shape[0]
-    for j2 in range(times):
-        tmp_mel_list.append(np.zeros_like(data_mel_gtruth[i][0], dtype=np.float32))
-    for j3 in range(times):
-        tmp_spec_list.append(np.zeros_like(data_spec_gtruth[i][0], dtype=np.float32))
-    data_mel_gtruth[i] = np.array(tmp_mel_list)
-    data_spec_gtruth[i] = np.array(tmp_spec_list)
-    print('now:', data_mel_gtruth[i].shape, data_spec_gtruth[i].shape)
-
-    data_inp[i] = np.array(data_inp[i])
-
-data_inp = np.array(data_inp)
-data_inp_mask = np.array(data_inp_mask)
-data_mel_gtruth = np.array(data_mel_gtruth)
-data_spec_gtruth = np.array(data_spec_gtruth)
-data_speaker = np.array(data_speaker)
-data_style = np.array(data_style)
-data_all_style = np.array(0.5 * np.ones((styles_kind, style_dim), dtype=np.float32))
-
-
-print('final:', data_inp.shape, data_inp.shape, data_mel_gtruth.shape, data_spec_gtruth.shape, data_all_style.shape)
-
-
-
-np.savez(outfile, inp=data_inp, inp_mask=data_inp_mask, mel_gtruth=data_mel_gtruth, spec_gtruth=data_spec_gtruth,
-         speaker=data_speaker, style=data_style, all_style = data_all_style)
-
-'''
+generor_init(100)
+print(wav_file_num)

@@ -114,6 +114,7 @@ class TTS(Model):
             state_tup = tuple([att_cell_state, aco_cell_state])
             output_ta = tf.TensorArray(size=reduced_time_steps, dtype=tf.float32)
             alpha_ta = tf.TensorArray(size=reduced_time_steps, dtype=tf.float32)
+            alpha_style_ta = tf.TensorArray(size=reduced_time_steps, dtype=tf.float32)
             indic_ta = tf.TensorArray(size=self.r + output_time_steps, dtype=tf.float32)
             time_major_mel_gtruth = tf.transpose(mel_gtruth, perm=(1, 0, 2))
             indic_array = tf.concat([tf.zeros([self.r, batch_size, OUTPUT_MEL_DIM]), time_major_mel_gtruth], axis=0)
@@ -122,7 +123,7 @@ class TTS(Model):
 
             time = tf.constant(0, dtype=tf.int32)
             cond = lambda time, *_: tf.less(time, reduced_time_steps)
-            def body(time, output_ta, alpha_ta, state_tup):
+            def body(time, output_ta, alpha_ta, alpha_style_ta, state_tup):
                 with tf.variable_scope("att-rnn"):
                     pre_ed_indic = tf.layers.dropout(tf.layers.dense(indic_ta.read(self.r*time + self.r - 1), 256, tf.nn.relu), training=self.training)
                     pre_ed_indic = tf.layers.dropout(tf.layers.dense(pre_ed_indic, 128, tf.nn.relu), training=self.training)
@@ -133,6 +134,7 @@ class TTS(Model):
                     alpha_ta = alpha_ta.write(time, alpha)
                 with tf.variable_scope("attention_style"):
                     context_style, alpha_style = att_module_style(query)
+                    alpha_style_ta = alpha_style_ta.write(time, alpha_style)
                 with tf.variable_scope("acoustic_module"):
                     aco_input = tf.layers.dense(tf.concat([att_cell_out, context, context_style], axis=-1), DEC_RNN_SIZE)
                     aco_cell_out, aco_cell_state = aco_cell(aco_input, state_tup[1])
@@ -140,10 +142,10 @@ class TTS(Model):
                     output_ta = output_ta.write(time, dense_out)
                 state_tup = tuple([att_cell_state, aco_cell_state])
 
-                return tf.add(time, 1), output_ta, alpha_ta, state_tup
+                return tf.add(time, 1), output_ta, alpha_ta, alpha_style_ta, state_tup
 
             ### run loop
-            _, output_mel_ta, final_alpha_ta, *_ = tf.while_loop(cond, body, [time, output_ta, alpha_ta, state_tup])
+            _, output_mel_ta, final_alpha_ta, final_alpha_style_ta, *_ = tf.while_loop(cond, body, [time, output_ta, alpha_ta, alpha_style_ta, state_tup])
         # print('hjhhhh', reduced_time_steps, batch_size, OUTPUT_MEL_DIM * self.r, batch_size, output_time_steps,
         #       OUTPUT_MEL_DIM)
         # sys.stdout.flush()
@@ -163,11 +165,19 @@ class TTS(Model):
             final_alpha = tf.reshape(final_alpha_ta.stack(), shape=(reduced_time_steps, batch_size, input_time_steps))
             final_alpha = tf.transpose(final_alpha, perm=(1,0,2))    # batch major
 
+            final_alpha_style = tf.reshape(final_alpha_style_ta.stack(), shape=(reduced_time_steps, batch_size, styles_kind))
+            final_alpha_style = tf.transpose(final_alpha_style, perm=(1, 0, 2))  # batch major
+            # self.alpha_style_hjk_img = tf.reshape(final_alpha_style, shape=(batch_size, reduced_time_steps, styles_kind))
+
         with tf.variable_scope("loss_and_metric"):
             self.loss_mel = tf.reduce_mean(tf.abs(mel_gtruth - output_mel))
             self.loss_spec = tf.reduce_mean(tf.abs(spec_gtruth - output_spec))
             self.loss = self.loss_mel + self.loss_spec
             self.alpha_img = tf.expand_dims(final_alpha, -1)
+            self.alpha_style_img = tf.expand_dims(final_alpha_style, -1)
+
+            tf.summary.image("train/alpha", self.alpha_img[:2])
+            tf.summary.image("train/alpha_style", self.alpha_style_img[:2])
 
     def summary(self, suffix, num_img=2):
         sums = []
@@ -175,6 +185,7 @@ class TTS(Model):
         sums.append(tf.summary.scalar("%s/loss_mel" % suffix, self.loss_mel))
         sums.append(tf.summary.scalar("%s/loss_spec" % suffix, self.loss_spec))
         sums.append(tf.summary.image("%s/alpha" % suffix, self.alpha_img[:num_img]))
+        sums.append(tf.summary.image("%s/alpha" % suffix, self.alpha_style_img[:num_img]))
 
         return tf.summary.merge(sums)
 
@@ -260,7 +271,9 @@ if __name__ == "__main__":
 
     with tf.Session() as sess:
         train_model.sess = sess
-        writer = tf.summary.FileWriter("logs/", train_model.sess.graph)
+        writer = tf.summary.FileWriter("logs/")
+
+        # train_summary = train_model.summary("train", 2)
 
         sess.run([tf.global_variables_initializer(), tf.local_variables_initializer()])
         ckpt = tf.train.get_checkpoint_state(save_path)
@@ -275,9 +288,10 @@ if __name__ == "__main__":
             ass_opt = train_model.single_style_token.assign(init_style_token)
             sess.run(ass_opt)
 
-        # writer = tf.summary.FileWriter("log/train", sess.graph)
 
 
+        total_loss = 0.
+        total_batch_cnt = 0
         try:
 
 
@@ -295,22 +309,51 @@ if __name__ == "__main__":
 
 
 
-                mean_loss_holder = tf.placeholder(shape=(), dtype=tf.float32, name='mean_loss')
-                train_epoch_summary = tf.summary.scalar('epoch/train/loss', mean_loss_holder)
-                total_loss = 0.
+                # mean_loss_holder = tf.placeholder(shape=(), dtype=tf.float32, name='mean_loss')
+                # train_epoch_summary = tf.summary.scalar('epoch/train/loss', mean_loss_holder)
+
 
 
 
                 print('start:', cnt, EPOCHS)
                 train_time = time.time()
                 print('pre time:', train_time - pre_time)
-                _, loss_eval, global_step_eval, new_style = sess.run([train_upd, train_model.loss, global_step, train_model.single_style_token],
-                                                                         feed_dict={inp:batch_inp, inp_mask:batch_inp_mask,
-                                                                                    mel_gtruth:batch_mel_gtruth,
-                                                                                    spec_gtruth:batch_spec_gtruth})
+
+
+                if cnt % 50 == 0 and cnt > 0:
+                    merged_summary_op = tf.summary.merge_all()
+                    summary_str, _, loss_eval, global_step_eval, new_style = sess.run(
+                        [merged_summary_op, train_upd, train_model.loss, global_step, train_model.single_style_token],
+                        feed_dict={inp: batch_inp, inp_mask: batch_inp_mask,
+                                   mel_gtruth: batch_mel_gtruth,
+                                   spec_gtruth: batch_spec_gtruth})
+                    writer.add_summary(summary_str, global_step_eval)
+                else:
+                     _, loss_eval, global_step_eval, new_style = sess.run(
+                        [train_upd, train_model.loss, global_step, train_model.single_style_token],
+                        feed_dict={inp: batch_inp, inp_mask: batch_inp_mask,
+                                   mel_gtruth: batch_mel_gtruth,
+                                   spec_gtruth: batch_spec_gtruth})
+                # summary_str = sess.run(merged_summary_op)
+
+
+
 
 
                 total_loss += loss_eval
+                total_batch_cnt += 1
+
+
+
+                if batch_id == slice_num - 1 and batch_no == slice_data_size:
+                    t = total_loss / total_batch_cnt
+
+                    with open('train_totol_loss.txt', 'a') as f:
+                        print('\nglobal_step_eval---', global_step_eval, '\n', file=f)
+                        print(t, file=f)
+                        sys.stdout.flush()
+                    total_loss = 0.
+                    total_batch_cnt = 0
 
 
                 post_time = time.time()
@@ -328,19 +371,21 @@ if __name__ == "__main__":
                     np.savez(os.path.join(save_path, 'style_token_' + str(global_step_eval) + '.npz'), all_style = new_style)
                 if global_step_eval == 100000:
                     break
+
+
                 mean_loss = total_loss / BATCH_SIZE
                 with open('train_loss.txt', 'a') as f:
                     f.write('{:f}\n'.format(loss_eval))
                 with open('train_style.txt', 'a') as f:
-                    f = open('train_style.txt', 'a')
+                    # f = open('train_style.txt', 'a')
                     print('\nglobal_step_eval---', global_step_eval, '\n', file=f)
                     print(new_style, file=f)
                     sys.stdout.flush()
 
 
 
-                train_epoch_summary_eval = sess.run(train_epoch_summary, feed_dict={mean_loss_holder: loss_eval})
-                writer.add_summary(train_epoch_summary_eval, cnt)
+                # train_epoch_summary_eval = sess.run(train_epoch_summary, feed_dict={mean_loss_holder: loss_eval})
+                # writer.add_summary(train_epoch_summary_eval, cnt)
                 print('post time:', time.time() - post_time)
 
 

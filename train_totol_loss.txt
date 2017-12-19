@@ -1,0 +1,108 @@
+
+global_step_eval--- 38984 
+
+0.961948145181
+
+global_step_eval--- 39168 
+
+0.97761484689
+
+global_step_eval--- 39352 
+
+0.964616022356
+
+global_step_eval--- 39536 
+
+0.968578890614
+
+global_step_eval--- 39720 
+
+0.962086121349
+
+global_step_eval--- 39904 
+
+0.979344079676
+
+global_step_eval--- 40088 
+
+0.958522734273
+
+global_step_eval--- 40272 
+
+0.963564695385
+
+global_step_eval--- 40456 
+
+0.959907370741
+
+global_step_eval--- 40640 
+
+0.955707368481
+
+global_step_eval--- 40824 
+
+0.959106536663
+
+global_step_eval--- 41008 
+
+0.957118368019
+
+global_step_eval--- 41192 
+
+0.960978082179
+
+global_step_eval--- 41376 
+
+0.956963330993
+
+global_step_eval--- 41560 
+
+0.961754868374
+
+global_step_eval--- 41744 
+
+0.953558100306
+
+global_step_eval--- 41928 
+
+0.960362456739
+
+global_step_eval--- 42112 
+
+0.962136015944
+
+global_step_eval--- 42296 
+
+0.958923751569
+
+global_step_eval--- 42480 
+
+0.947938336302
+
+global_step_eval--- 42664 
+
+1.46924760063
+
+global_step_eval--- 42848 
+
+1.3375160503
+
+global_step_eval--- 43032 
+
+1.25796001502
+
+global_step_eval--- 43216 
+
+1.203837833
+
+global_step_eval--- 43400 
+
+1.15423485216
+
+global_step_eval--- 43584 
+
+1.13600931932
+
+global_step_eval--- 43768 
+
+1.10544899657

@@ -106,3 +106,987 @@ global_step_eval--- 43584
 global_step_eval--- 43768 
 
 1.10544899657
+
+global_step_eval--- 43952 
+
+1.09300274855
+
+global_step_eval--- 44136 
+
+1.07491123854
+
+global_step_eval--- 44320 
+
+1.06187460507
+
+global_step_eval--- 44504 
+
+1.05774431028
+
+global_step_eval--- 44688 
+
+1.04510153765
+
+global_step_eval--- 44872 
+
+1.04472313319
+
+global_step_eval--- 45056 
+
+1.02927446592
+
+global_step_eval--- 45240 
+
+1.03124378524
+
+global_step_eval--- 45424 
+
+1.0196878557
+
+global_step_eval--- 45608 
+
+1.02228142094
+
+global_step_eval--- 45792 
+
+1.02350776124
+
+global_step_eval--- 45976 
+
+1.01464376582
+
+global_step_eval--- 46160 
+
+1.01883536707
+
+global_step_eval--- 46344 
+
+1.01292732714
+
+global_step_eval--- 46528 
+
+1.01082829354
+
+global_step_eval--- 46712 
+
+1.00810280572
+
+global_step_eval--- 46896 
+
+1.00198757746
+
+global_step_eval--- 47080 
+
+1.00423765766
+
+global_step_eval--- 47264 
+
+1.00345530199
+
+global_step_eval--- 47448 
+
+0.998132706984
+
+global_step_eval--- 47632 
+
+0.988988835527
+
+global_step_eval--- 47816 
+
+0.999458257919
+
+global_step_eval--- 48000 
+
+0.99639548912
+
+global_step_eval--- 48184 
+
+0.989599177533
+
+global_step_eval--- 48368 
+
+0.989168200804
+
+global_step_eval--- 48552 
+
+0.98021081997
+
+global_step_eval--- 48736 
+
+0.991585998431
+
+global_step_eval--- 48920 
+
+0.992515648837
+
+global_step_eval--- 49104 
+
+0.989324232806
+
+global_step_eval--- 49288 
+
+0.981524933453
+
+global_step_eval--- 49472 
+
+0.986864799229
+
+global_step_eval--- 49656 
+
+0.981258470079
+
+global_step_eval--- 49840 
+
+0.981872108158
+
+global_step_eval--- 50024 
+
+0.976058971947
+
+global_step_eval--- 50208 
+
+0.973385568546
+
+global_step_eval--- 50392 
+
+0.98124170935
+
+global_step_eval--- 50576 
+
+0.987064119104
+
+global_step_eval--- 50760 
+
+0.984357591556
+
+global_step_eval--- 50944 
+
+0.977775633983
+
+global_step_eval--- 51128 
+
+0.986711167447
+
+global_step_eval--- 51312 
+
+0.977118696855
+
+global_step_eval--- 51496 
+
+0.98019728599
+
+global_step_eval--- 51680 
+
+0.977064124592
+
+global_step_eval--- 51864 
+
+0.984104544572
+
+global_step_eval--- 52048 
+
+0.98254302306
+
+global_step_eval--- 52232 
+
+0.979039136968
+
+global_step_eval--- 52416 
+
+0.987517961665
+
+global_step_eval--- 52600 
+
+0.978306034985
+
+global_step_eval--- 52784 
+
+0.986504027539
+
+global_step_eval--- 52968 
+
+0.978223043615
+
+global_step_eval--- 53152 
+
+0.976338832923
+
+global_step_eval--- 53336 
+
+0.973320232461
+
+global_step_eval--- 53520 
+
+0.978665353487
+
+global_step_eval--- 53704 
+
+0.985564232196
+
+global_step_eval--- 53888 
+
+0.986617489677
+
+global_step_eval--- 54072 
+
+0.974465036198
+
+global_step_eval--- 54256 
+
+0.972704156747
+
+global_step_eval--- 54440 
+
+0.974464703513
+
+global_step_eval--- 54624 
+
+0.977643975745
+
+global_step_eval--- 54808 
+
+0.973559012879
+
+global_step_eval--- 54992 
+
+0.972846672911
+
+global_step_eval--- 55176 
+
+0.975015445734
+
+global_step_eval--- 55360 
+
+0.979603374782
+
+global_step_eval--- 55544 
+
+0.979890324823
+
+global_step_eval--- 55728 
+
+0.979918004378
+
+global_step_eval--- 55912 
+
+0.967460305794
+
+global_step_eval--- 56096 
+
+0.975122660884
+
+global_step_eval--- 56280 
+
+0.975593491579
+
+global_step_eval--- 56464 
+
+0.976274278663
+
+global_step_eval--- 56648 
+
+0.970378265271
+
+global_step_eval--- 56832 
+
+0.977713104985
+
+global_step_eval--- 57016 
+
+0.972599069385
+
+global_step_eval--- 57200 
+
+0.969072620182
+
+global_step_eval--- 57384 
+
+0.972783756969
+
+global_step_eval--- 57568 
+
+0.970232801755
+
+global_step_eval--- 57752 
+
+0.983473571098
+
+global_step_eval--- 57936 
+
+0.986940459551
+
+global_step_eval--- 58120 
+
+0.979656269369
+
+global_step_eval--- 58304 
+
+0.980933187448
+
+global_step_eval--- 58488 
+
+0.967971682549
+
+global_step_eval--- 58672 
+
+0.975729159201
+
+global_step_eval--- 58856 
+
+0.973289580125
+
+global_step_eval--- 59040 
+
+0.978123019247
+
+global_step_eval--- 59224 
+
+0.973999255053
+
+global_step_eval--- 59408 
+
+0.978913918785
+
+global_step_eval--- 59592 
+
+0.967076908959
+
+global_step_eval--- 59776 
+
+0.980299665552
+
+global_step_eval--- 59960 
+
+0.96869074861
+
+global_step_eval--- 60144 
+
+0.96728128211
+
+global_step_eval--- 60328 
+
+0.974841875874
+
+global_step_eval--- 60512 
+
+0.971195306143
+
+global_step_eval--- 60696 
+
+0.973443176921
+
+global_step_eval--- 60880 
+
+0.975475356631
+
+global_step_eval--- 61064 
+
+0.972161617292
+
+global_step_eval--- 61248 
+
+0.97153885533
+
+global_step_eval--- 61432 
+
+0.969535963205
+
+global_step_eval--- 61616 
+
+0.9807707852
+
+global_step_eval--- 61800 
+
+0.978853526323
+
+global_step_eval--- 61984 
+
+0.971737845436
+
+global_step_eval--- 62168 
+
+0.967747905656
+
+global_step_eval--- 62352 
+
+0.964470678697
+
+global_step_eval--- 62536 
+
+0.967776602539
+
+global_step_eval--- 62720 
+
+0.964427111913
+
+global_step_eval--- 62904 
+
+0.97080193622
+
+global_step_eval--- 63088 
+
+0.978256073983
+
+global_step_eval--- 63272 
+
+0.960242249072
+
+global_step_eval--- 63456 
+
+0.971931012266
+
+global_step_eval--- 63640 
+
+0.966295211697
+
+global_step_eval--- 63824 
+
+0.970183597635
+
+global_step_eval--- 64008 
+
+0.958950943111
+
+global_step_eval--- 64192 
+
+0.96759335065
+
+global_step_eval--- 64376 
+
+0.965820864815
+
+global_step_eval--- 64560 
+
+0.963572852475
+
+global_step_eval--- 64744 
+
+0.973799451052
+
+global_step_eval--- 64928 
+
+0.980732467511
+
+global_step_eval--- 65112 
+
+0.959730646533
+
+global_step_eval--- 65296 
+
+0.971297181495
+
+global_step_eval--- 65480 
+
+0.959860021329
+
+global_step_eval--- 65664 
+
+0.975026863587
+
+global_step_eval--- 65848 
+
+0.957949479961
+
+global_step_eval--- 66032 
+
+0.959173728266
+
+global_step_eval--- 66216 
+
+0.974890399886
+
+global_step_eval--- 66400 
+
+0.954418105762
+
+global_step_eval--- 66584 
+
+0.96730339268
+
+global_step_eval--- 66768 
+
+0.971346786975
+
+global_step_eval--- 66952 
+
+0.958917079088
+
+global_step_eval--- 67136 
+
+0.970100717052
+
+global_step_eval--- 67320 
+
+0.969169283691
+
+global_step_eval--- 67504 
+
+0.972293001154
+
+global_step_eval--- 67688 
+
+0.960437927881
+
+global_step_eval--- 67872 
+
+0.962822911694
+
+global_step_eval--- 68056 
+
+0.96502077871
+
+global_step_eval--- 68240 
+
+0.966087182741
+
+global_step_eval--- 68424 
+
+0.960698637302
+
+global_step_eval--- 68608 
+
+0.967601227372
+
+global_step_eval--- 68792 
+
+0.955865337635
+
+global_step_eval--- 68976 
+
+0.950460785757
+
+global_step_eval--- 69160 
+
+0.956982525308
+
+global_step_eval--- 69344 
+
+0.949125993187
+
+global_step_eval--- 69528 
+
+0.95612722862
+
+global_step_eval--- 69712 
+
+0.960184776265
+
+global_step_eval--- 69896 
+
+0.953548311539
+
+global_step_eval--- 70080 
+
+0.960210506683
+
+global_step_eval--- 70264 
+
+0.959252476854
+
+global_step_eval--- 70448 
+
+0.962467995027
+
+global_step_eval--- 70632 
+
+0.957395725762
+
+global_step_eval--- 70816 
+
+0.965179940119
+
+global_step_eval--- 71000 
+
+0.961024386079
+
+global_step_eval--- 71184 
+
+0.953325250712
+
+global_step_eval--- 71368 
+
+0.977269579049
+
+global_step_eval--- 71552 
+
+0.960262232825
+
+global_step_eval--- 71736 
+
+0.954940174099
+
+global_step_eval--- 71920 
+
+0.953656617876
+
+global_step_eval--- 72104 
+
+0.95650544714
+
+global_step_eval--- 72288 
+
+0.949112269218
+
+global_step_eval--- 72472 
+
+0.959408447146
+
+global_step_eval--- 72656 
+
+0.958154153727
+
+global_step_eval--- 72840 
+
+0.957894716088
+
+global_step_eval--- 73024 
+
+0.959830268246
+
+global_step_eval--- 73208 
+
+0.958850406434
+
+global_step_eval--- 73392 
+
+0.954624370388
+
+global_step_eval--- 73576 
+
+0.957516694198
+
+global_step_eval--- 73760 
+
+0.963378414674
+
+global_step_eval--- 73944 
+
+0.95062603024
+
+global_step_eval--- 74128 
+
+0.951214404534
+
+global_step_eval--- 74312 
+
+0.958015314749
+
+global_step_eval--- 74496 
+
+0.959692023371
+
+global_step_eval--- 74680 
+
+0.951289114097
+
+global_step_eval--- 74864 
+
+0.963086983108
+
+global_step_eval--- 75048 
+
+0.960699551617
+
+global_step_eval--- 75232 
+
+0.970127526185
+
+global_step_eval--- 75416 
+
+0.964397825301
+
+global_step_eval--- 75600 
+
+0.958680075796
+
+global_step_eval--- 75784 
+
+0.950235585966
+
+global_step_eval--- 75968 
+
+0.959487645198
+
+global_step_eval--- 76152 
+
+0.958859478488
+
+global_step_eval--- 76336 
+
+0.96077330783
+
+global_step_eval--- 76520 
+
+0.950368851099
+
+global_step_eval--- 76704 
+
+0.949330372979
+
+global_step_eval--- 76888 
+
+0.96491915846
+
+global_step_eval--- 77072 
+
+0.96134059034
+
+global_step_eval--- 77256 
+
+0.952358456248
+
+global_step_eval--- 77440 
+
+0.954259513999
+
+global_step_eval--- 77624 
+
+0.945814459868
+
+global_step_eval--- 77808 
+
+0.963266348547
+
+global_step_eval--- 77992 
+
+0.940803552451
+
+global_step_eval--- 78176 
+
+0.95553627756
+
+global_step_eval--- 78360 
+
+0.948769451807
+
+global_step_eval--- 78544 
+
+1.00290078378
+
+global_step_eval--- 78728 
+
+0.972861859462
+
+global_step_eval--- 78912 
+
+0.958536382441
+
+global_step_eval--- 79096 
+
+0.950979604183
+
+global_step_eval--- 79280 
+
+0.95473335651
+
+global_step_eval--- 79464 
+
+0.96029423242
+
+global_step_eval--- 79648 
+
+0.956046852891
+
+global_step_eval--- 79832 
+
+0.96236591446
+
+global_step_eval--- 80016 
+
+0.959165325145
+
+global_step_eval--- 80200 
+
+0.954620798159
+
+global_step_eval--- 80384 
+
+0.950009931689
+
+global_step_eval--- 80568 
+
+0.959255674611
+
+global_step_eval--- 80752 
+
+0.973699245116
+
+global_step_eval--- 80936 
+
+0.955899017661
+
+global_step_eval--- 81120 
+
+0.94672672321
+
+global_step_eval--- 81304 
+
+0.960473988691
+
+global_step_eval--- 81488 
+
+0.95043351566
+
+global_step_eval--- 81672 
+
+0.958600057208
+
+global_step_eval--- 81856 
+
+1.03773007558
+
+global_step_eval--- 82040 
+
+1.0944781352
+
+global_step_eval--- 82224 
+
+1.14257188465
+
+global_step_eval--- 82408 
+
+1.06541288142
+
+global_step_eval--- 82592 
+
+1.03418914196
+
+global_step_eval--- 82776 
+
+1.02329650278
+
+global_step_eval--- 82960 
+
+1.02042075992
+
+global_step_eval--- 83144 
+
+1.02570304145
+
+global_step_eval--- 83328 
+
+1.04172318526
+
+global_step_eval--- 83512 
+
+1.12860733206
+
+global_step_eval--- 83696 
+
+1.05785956396
+
+global_step_eval--- 83880 
+
+1.04116341391
+
+global_step_eval--- 84064 
+
+1.02103576809
+
+global_step_eval--- 84248 
+
+1.02555404312
+
+global_step_eval--- 84432 
+
+1.00548579009
+
+global_step_eval--- 84616 
+
+1.00506762059
+
+global_step_eval--- 84800 
+
+1.00711408031
+
+global_step_eval--- 84984 
+
+0.9979088436
+
+global_step_eval--- 85168 
+
+1.02206210209
+
+global_step_eval--- 85352 
+
+1.00720066156
+
+global_step_eval--- 85536 
+
+1.00121413949
+
+global_step_eval--- 85720 
+
+0.997828637776
+
+global_step_eval--- 85904 
+
+0.986699681243
+
+global_step_eval--- 86088 
+
+0.986171604175
+
+global_step_eval--- 86272 
+
+0.99916731631
+
+global_step_eval--- 86456 
+
+1.01932063893
+
+global_step_eval--- 86640 
+
+1.01621404679
+
+global_step_eval--- 86824 
+
+1.02773384377
+
+global_step_eval--- 87008 
+
+0.999637859671
+
+global_step_eval--- 87192 
+
+0.989023892452
+
+global_step_eval--- 87376 
+
+0.996353651032
+
+global_step_eval--- 87560 
+
+0.995920742659
+
+global_step_eval--- 87744 
+
+0.999453671277
+
+global_step_eval--- 87928 
+
+1.0089906778
+
+global_step_eval--- 88112 
+
+0.995775986625
+
+global_step_eval--- 88296 
+
+0.97916723561
+
+global_step_eval--- 88480 
+
+1.00568414577
+
+global_step_eval--- 88664 
+
+1.02664888764
+
+global_step_eval--- 88848 
+
+1.03536442829
+
+global_step_eval--- 89032 
+
+1.02701798907
